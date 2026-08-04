@@ -3398,42 +3398,102 @@
       50% { transform: scale(1.06); filter: brightness(1.25); }
     }
 
+    .fork-stage {
+      cursor: ew-resize;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .fork-stage::after {
+      content: "拖动画面 · 轻点圆点自动切换";
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      z-index: 8;
+      transform: translateX(-50%);
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 999px;
+      color: rgba(255,255,255,.48);
+      background: rgba(8,8,20,.48);
+      font-size: 10px;
+      letter-spacing: .08em;
+      white-space: nowrap;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
     .fork-divider {
       position: absolute;
       left: var(--split);
       top: 0;
       bottom: 0;
-      z-index: 6;
+      z-index: 9;
+      width: 48px;
+      transform: translateX(-50%);
+      cursor: ew-resize;
+      pointer-events: auto;
+    }
+
+    .fork-divider::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
       width: 2px;
       transform: translateX(-50%);
       background: linear-gradient(transparent, #fff, var(--pink), #fff, transparent);
       box-shadow: 0 0 24px rgba(255,255,255,.55);
-      pointer-events: none;
     }
 
     .fork-divider i {
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(255,255,255,.45);
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255,255,255,.52);
       border-radius: 50%;
       transform: translate(-50%, -50%);
       background:
         radial-gradient(circle, white 0 2px, transparent 3px),
-        rgba(20,15,33,.86);
-      box-shadow: 0 0 24px rgba(255,255,255,.22);
+        rgba(20,15,33,.90);
+      box-shadow: 0 0 28px rgba(255,255,255,.28);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .fork-divider:hover i,
+    .fork-stage:focus-visible .fork-divider i {
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow: 0 0 34px rgba(255,255,255,.42);
+    }
+
+    .fork-stage.is-dragging .fork-divider i {
+      transform: translate(-50%, -50%) scale(.94);
+    }
+
+    .fork-stage.auto-moving .fork-color {
+      transition: clip-path .62s cubic-bezier(.22,.8,.2,1);
+    }
+
+    .fork-stage.auto-moving .fork-divider {
+      transition: left .62s cubic-bezier(.22,.8,.2,1);
     }
 
     .fork-range {
       position: absolute;
-      inset: auto 6% 25px;
-      z-index: 10;
-      width: 88%;
-      height: 26px;
-      opacity: .01;
-      cursor: ew-resize;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      opacity: 0;
+      pointer-events: none;
     }
 
     .wrong-row-ending {
@@ -4191,9 +4251,9 @@
         margin-left: 0;
       }
 
-      .fork-range {
-        inset: auto 4% 14px;
-        width: 92%;
+      .fork-stage::after {
+        bottom: 12px;
+        font-size: 9px;
       }
 
       .constellation-sky {
@@ -11328,7 +11388,7 @@
           </p>
         </div>
 
-        <div class="fork-stage reveal" id="forkStage">
+        <div class="fork-stage reveal" id="forkStage" tabindex="0" role="slider" aria-valuemin="10" aria-valuemax="90" aria-valuenow="54" aria-label="拖动比较两个世界，轻点中间圆点可自动切换">
           <div class="fork-world fork-muted">
             <div class="fork-badge">如果没有填错</div>
             <div class="fork-scene">
@@ -11365,7 +11425,8 @@
             min="10"
             max="90"
             value="54"
-            aria-label="拖动查看没有填错与填错之后的两个世界"
+            tabindex="-1"
+            aria-hidden="true"
           />
         </div>
 
@@ -15081,16 +15142,98 @@
       /* ---------- Wrong-row comparison ---------- */
       const forkStage = document.getElementById("forkStage");
       const forkRange = document.getElementById("forkRange");
+      const forkDivider = document.getElementById("forkDivider");
+      let forkValue = Number(forkRange?.value || 54);
+      let forkPointerId = null;
+      let forkPointerStartX = 0;
+      let forkPointerMoved = false;
+      let forkStartedOnDivider = false;
+      let forkAutoTimer = 0;
+
+      function clampFork(value) {
+        return Math.max(10, Math.min(90, Number(value) || 54));
+      }
 
       function updateFork(value) {
         if (!forkStage) return;
-        forkStage.style.setProperty("--split", value + "%");
+        forkValue = clampFork(value);
+        forkStage.style.setProperty("--split", forkValue + "%");
+        forkStage.setAttribute("aria-valuenow", String(Math.round(forkValue)));
+        if (forkRange) forkRange.value = String(forkValue);
       }
+
+      function forkValueFromPointer(clientX) {
+        const rect = forkStage?.getBoundingClientRect();
+        if (!rect?.width) return forkValue;
+        const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        return 10 + ratio * 80;
+      }
+
+      function autoMoveFork(target) {
+        if (!forkStage) return;
+        clearTimeout(forkAutoTimer);
+        forkStage.classList.remove("is-dragging");
+        forkStage.classList.add("auto-moving");
+        requestAnimationFrame(() => updateFork(target));
+        forkAutoTimer = window.setTimeout(() => {
+          forkStage.classList.remove("auto-moving");
+        }, 680);
+      }
+
+      forkStage?.addEventListener("pointerdown", event => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        clearTimeout(forkAutoTimer);
+        forkStage.classList.remove("auto-moving");
+        forkPointerId = event.pointerId;
+        forkPointerStartX = event.clientX;
+        forkPointerMoved = false;
+        forkStartedOnDivider = Boolean(event.target.closest?.("#forkDivider"));
+        forkStage.classList.add("is-dragging");
+        forkStage.setPointerCapture?.(event.pointerId);
+        if (!forkStartedOnDivider) updateFork(forkValueFromPointer(event.clientX));
+      });
+
+      forkStage?.addEventListener("pointermove", event => {
+        if (forkPointerId !== event.pointerId) return;
+        if (Math.abs(event.clientX - forkPointerStartX) > 5) forkPointerMoved = true;
+        if (forkPointerMoved || !forkStartedOnDivider) {
+          updateFork(forkValueFromPointer(event.clientX));
+        }
+      });
+
+      function finishForkPointer(event) {
+        if (forkPointerId !== event.pointerId) return;
+        forkStage?.releasePointerCapture?.(event.pointerId);
+        forkStage?.classList.remove("is-dragging");
+        if (forkStartedOnDivider && !forkPointerMoved) {
+          autoMoveFork(forkValue < 72 ? 90 : 10);
+        }
+        forkPointerId = null;
+      }
+
+      forkStage?.addEventListener("pointerup", finishForkPointer);
+      forkStage?.addEventListener("pointercancel", finishForkPointer);
+
+      forkStage?.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          updateFork(forkValue - 4);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          updateFork(forkValue + 4);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          autoMoveFork(10);
+        } else if (event.key === "End" || event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          autoMoveFork(forkValue < 72 ? 90 : 10);
+        }
+      });
 
       forkRange?.addEventListener("input", event => {
         updateFork(event.currentTarget.value);
       });
-      updateFork(forkRange?.value || 54);
+      updateFork(forkValue);
 
       /* ---------- Interactive memory constellation ---------- */
       const stars = [...document.querySelectorAll(".memory-star")];
