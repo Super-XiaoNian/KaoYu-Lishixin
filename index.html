@@ -9933,11 +9933,19 @@
       box-shadow: 0 0 70px rgba(var(--story-a-rgb),.42), 0 0 130px rgba(var(--story-b-rgb),.18);
     }
     .song-meaning-layer[data-effect="warm"] .song-meaning-card { box-shadow: 0 42px 130px rgba(0,0,0,.46), 0 0 80px rgba(var(--story-a-rgb),.12), inset 0 1px rgba(255,255,255,.09); }
-    .song-meaning-layer[data-effect="eclipse"] .story-orbit-core {
-      background: linear-gradient(90deg, rgba(var(--story-a-rgb),.82) 0 48%, rgba(5,7,18,.95) 52% 100%);
-      box-shadow: -22px 0 60px rgba(var(--story-a-rgb),.28), 22px 0 60px rgba(var(--story-b-rgb),.22);
+    .song-meaning-layer[data-effect="toast"] .story-orbit-core {
+      background:
+        radial-gradient(circle at 36% 28%, rgba(255,255,255,.96), transparent 9%),
+        radial-gradient(circle at 50% 52%, rgba(var(--story-a-rgb),.88), rgba(var(--story-b-rgb),.50) 43%, rgba(8,8,23,.94) 76%);
+      box-shadow: 0 0 75px rgba(var(--story-a-rgb),.42), 0 0 130px rgba(var(--story-b-rgb),.20), inset -16px -12px 30px rgba(0,0,0,.30);
+      animation: storyToastGlow 2.8s ease-in-out infinite alternate;
     }
-    .song-meaning-layer[data-effect="eclipse"] .story-orbit-ring-c { border-style: dashed; animation-duration: 18s; }
+    .song-meaning-layer[data-effect="toast"] .story-orbit-ring-a { border-style: dashed; animation-duration: 8s; }
+    .song-meaning-layer[data-effect="toast"] .story-orbit-ring-c { animation-duration: 14s; }
+    @keyframes storyToastGlow {
+      from { transform: scale(.94) rotate(-3deg); filter: brightness(.96); }
+      to { transform: scale(1.06) rotate(3deg); filter: brightness(1.16) saturate(1.12); }
+    }
     .song-meaning-layer[data-effect="finale"] .song-meaning-card {
       box-shadow: 0 42px 150px rgba(0,0,0,.55), 0 0 110px rgba(var(--story-a-rgb),.18), inset 0 1px rgba(255,255,255,.12);
     }
@@ -12752,7 +12760,7 @@
               <button class="playlist-item" type="button" data-track="4">
                 <span class="playlist-index">05</span>
                 <i class="playlist-cover cover-d" aria-hidden="true"></i>
-                <span class="playlist-meta"><strong>小半（Live）</strong><em>谭松韵 / 王铮亮</em></span>
+                <span class="playlist-meta"><strong>干杯</strong><em>五月天</em></span>
                 <small>已同步歌词</small>
               </button>
             </div>
@@ -16134,10 +16142,10 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
           base: "ending-03"
         },
         {
-          title: "小半（Live）",
+          title: "干杯",
           kicker: "ENDING PLAYLIST · 05/05",
-          artist: "谭松韵 / 王铮亮",
-          subtitle: "现场氛围 · 已同步歌词",
+          artist: "五月天",
+          subtitle: "友情终章 · 已同步歌词",
           sources: [
             { src: "audio/ending-04.flac", type: "audio/flac" },
             { src: "audio/ending-04.mp3", type: "audio/mpeg" },
@@ -16146,93 +16154,77 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
             { src: "audio/ending-04.ogg", type: "audio/ogg" }
           ],
           lyrics: [
-            { time: 0, text: "原唱：陈粒", credit: true },
-            { time: 0.86, text: "作词：涂玲子", credit: true },
-            { time: 1.72, text: "作曲：陈粒", credit: true },
-            { time: 2.58, text: "编曲：谢承煜", credit: true },
-            { time: 3.44, text: "制作人：刘卓@维伴音乐/郎梓朔@维伴音乐", credit: true },
-            { time: 4.3, text: "音乐总监：刘卓@维伴音乐", credit: true },
-            { time: 5.16, text: "音响总监：何飚", credit: true },
-            { time: 6.02, text: "音乐混音：黄可爱@维伴音乐", credit: true },
-            { time: 7.74, text: "鼓：卢炜@维伴音乐", credit: true },
-            { time: 8.6, text: "打击乐：刘效松@维伴音乐", credit: true },
-            { time: 9.46, text: "贝斯：李九君@维伴音乐", credit: true },
-            { time: 10.32, text: "吉他：金天@维伴音乐", credit: true },
-            { time: 11.18, text: "吉他：崔万平@维伴音乐", credit: true },
-            { time: 12.04, text: "钢琴：傅一峥@维伴音乐", credit: true },
-            { time: 12.9, text: "键盘：李海郡@维伴音乐", credit: true },
-            { time: 13.76, text: "Program：郎梓朔@维伴音乐", credit: true },
-            { time: 14.62, text: "和音编写：石行@维伴音乐", credit: true },
-            { time: 15.48, text: "合音：张炜@维伴音乐/车英豪@维伴音乐/马竹君@维伴音乐/顾艺璇@维伴音乐", credit: true },
-            { time: 16.34, text: "乐队统筹：张伊然@维伴音乐/边境@维伴音乐", credit: true },
-            { time: 17.2, text: "灯光设计：田为钧/卢晓伟", credit: true },
-            { time: 18.06, text: "不敢回看" },
-            { time: 20.13, text: "左顾右盼不自然的暗自喜欢" },
-            { time: 24.57, text: "偷偷搭讪总没完地坐立难安" },
-            { time: 28.74, text: "试探说晚安多空泛又心酸" },
-            { time: 35.37, text: "低头呢喃" },
-            { time: 37.5, text: "对你的偏爱太过于明目张胆" },
-            { time: 41.82, text: "在原地打转的小丑伤心不断" },
-            { time: 46.17, text: "空空留遗憾多难堪又为难" },
-            { time: 52.26, text: "释然慵懒尽欢" },
-            { time: 55.44, text: "时间风干后你与我再无关" },
-            { time: 61.02, text: "没答案怎么办看不惯自我欺瞒" },
-            { time: 68.91, text: "纵容着喜欢的讨厌的宠溺的厌倦的" },
-            { time: 74.37, text: "一个个慢慢黯淡" },
-            { time: 77.67, text: "纵容着任性的随意的放肆的轻易的" },
-            { time: 83.01, text: "将所有欢脱倾翻" },
-            { time: 86.37, text: "不应该太心软不大胆太死板不果断" },
-            { time: 91.71, text: "玩弄着肆无忌惮" },
-            { time: 95.04, text: "不应该舍弃了死心了放手了断念了" },
-            { time: 100.5, text: "无可奈何不耐烦" },
-            { time: 104.43, text: "不算" },
-            { time: 109.11, text: "灯火阑珊" },
-            { time: 111.75, text: "我的心借了你的光" },
-            { time: 113.4, text: "是明是暗" },
-            { time: 115.56, text: "笑自己情绪太泛滥" },
-            { time: 117.69, text: "形只影单" },
-            { time: 119.94, text: "自嘲成习惯" },
-            { time: 121.77, text: "多敏感又难缠" },
-            { time: 126.57, text: "低头呢喃" },
-            { time: 128.7, text: "对你的偏爱太过于" },
-            { time: 130.8, text: "明目张胆" },
-            { time: 132.99, text: "在原地打转的小丑" },
-            { time: 135.15, text: "伤心不断" },
-            { time: 137.28, text: "空空留遗憾" },
-            { time: 139.11, text: "多难堪又为难" },
-            { time: 143.4, text: "释然慵懒尽欢" },
-            { time: 146.58, text: "时间风干后你与我再无关" },
-            { time: 152.16, text: "没答案怎么办看不惯自我欺瞒" },
-            { time: 160.11, text: "纵容着喜欢的讨厌的宠溺的厌倦的" },
-            { time: 165.54, text: "一个个慢慢黯淡" },
-            { time: 168.81, text: "纵容着任性的随意的放肆的轻易的" },
-            { time: 174.09, text: "将所有欢脱倾翻" },
-            { time: 177.3, text: "不应该太心软不大胆太死板不果断" },
-            { time: 182.85, text: "玩弄着肆无忌惮" },
-            { time: 186.15, text: "不应该舍弃了死心了放手了断念了" },
-            { time: 191.55, text: "无可奈何不耐烦" },
-            { time: 212.22, text: "任由着你躲闪我追赶你走散我呼喊" },
-            { time: 217.53, text: "是谁在泛泛而谈" },
-            { time: 220.86, text: "任由着你来了你笑了你走了不看我" },
-            { time: 226.08, text: "与理所当然分摊" },
-            { time: 229.62, text: "不明白残存的没用的多余的不必的" },
-            { time: 234.87, text: "破烂也在手紧攥" },
-            { time: 238.14, text: "不明白谁赧然谁无端谁古板谁极端" },
-            { time: 243.6, text: "无辜不知所以然" },
-            { time: 246.9, text: "纵容着喜欢的讨厌的宠溺的厌倦的" },
-            { time: 252.21, text: "一个个慢慢黯淡" },
-            { time: 254.52, text: "（喜欢讨厌宠溺厌倦不果断不耐烦）" },
-            { time: 255.57, text: "纵容着任性的随意的放肆的轻易的" },
-            { time: 260.76, text: "（任性随意放肆轻易心太软又不甘）" },
-            { time: 261.72, text: "将所有欢脱倾翻" },
-            { time: 263.85, text: "不应该太心软不大胆太死板不果断" },
-            { time: 269.55, text: "玩弄着肆无忌惮" },
-            { time: 272.88, text: "不应该舍弃了死心了放手了断念了" },
-            { time: 278.31, text: "无可奈何不耐烦" },
-            { time: 282.6, text: "灯火阑珊" },
-            { time: 286.77, text: "是明是暗" },
-            { time: 291.36, text: "暗自喜欢" },
-            { time: 295.65, text: "低头呢喃" }
+            { time: 0, text: "作词: 五月天 阿信", credit: true },
+            { time: 1, text: "作曲: 五月天 阿信", credit: true },
+            { time: 2, text: "编曲: 五月天 / 于京延", credit: true },
+            { time: 5.25, text: "会不会有一天时间真的能倒退" },
+            { time: 11.16, text: "退回你的我的回不去的悠悠的岁月" },
+            { time: 17.04, text: "也许会有一天世界真的有终点" },
+            { time: 22.86, text: "也要和你举起回忆酿的甜" },
+            { time: 28.02, text: "和你再干一杯" },
+            { time: 40.68, text: "如果说要我选出代表青春那个画面" },
+            { time: 43.62, text: "浮现了那滴眼泪那片蓝天那年毕业" },
+            { time: 46.5, text: "那一张边哭边笑还要拥抱是你的脸" },
+            { time: 49.41, text: "想起来可爱可怜" },
+            { time: 50.79, text: "可歌可泣可是多怀念" },
+            { time: 52.95, text: "怀念总是突然怀念不谈条件" },
+            { time: 55.35, text: "当回忆冲破考卷冲出岁月在我眼前" },
+            { time: 58.29, text: "我和你流着汗水喝着汽水在操场边" },
+            { time: 61.14, text: "说好了无论如何" },
+            { time: 62.52, text: "一起走到未来的世界" },
+            { time: 64.56, text: "现在就是那个未来那个世界" },
+            { time: 67.05, text: "为什么你的身边我的身边" },
+            { time: 69.12, text: "不是同一边" },
+            { time: 70.38, text: "友情曾像诺亚方舟坚强誓言" },
+            { time: 72.87, text: "只是我望着海面" },
+            { time: 74.25, text: "等着永远模糊了视线" },
+            { time: 77.01, text: "会不会有一天时间真的能倒退" },
+            { time: 82.89, text: "退回你的我的回不去的悠悠的岁月" },
+            { time: 88.74, text: "也许会有一天世界真的有终点" },
+            { time: 94.59, text: "也要和你举起回忆酿的甜" },
+            { time: 99.75, text: "和你再干一杯" },
+            { time: 112.32, text: "这些年买了四轮买了手表买了单眼" },
+            { time: 115.32, text: "却发现追不到的停不了的还是那些" },
+            { time: 118.23, text: "人生是只有认命只能宿命只好宿醉" },
+            { time: 121.2, text: "只剩下高的笑点" },
+            { time: 122.52, text: "低的哭点却没成熟点" },
+            { time: 124.59, text: "成熟就是幻想幻灭一场磨炼" },
+            { time: 127.05, text: "为什么只有梦想越磨越小小到不见" },
+            { time: 129.96, text: "有时候好想流泪好想流泪却没眼泪" },
+            { time: 132.87, text: "期待会你会不会" },
+            { time: 134.22, text: "他会不会开个同学会" },
+            { time: 136.38, text: "他在等你你在等我我在等谁" },
+            { time: 138.72, text: "又是谁孩子没睡" },
+            { time: 140.04, text: "电话没电心情没准备" },
+            { time: 142.17, text: "天空不断黑了又亮亮了又黑" },
+            { time: 144.66, text: "那光阴沧海桑田" },
+            { time: 145.95, text: "远走高飞再没力气追" },
+            { time: 150.12, text: "会不会有一天时间真的能倒退" },
+            { time: 156.09, text: "退回你的我的回不去的悠悠的岁月" },
+            { time: 161.91, text: "也许会有一天世界真的有终点" },
+            { time: 167.76, text: "也要和你举起回忆酿的甜" },
+            { time: 172.89, text: "和你再干一杯" },
+            { time: 191.19, text: "会不会有一天时间真的能倒退" },
+            { time: 197.04, text: "退回你的我的回不去的悠悠的岁月" },
+            { time: 202.86, text: "也许会有一天世界真的有终点" },
+            { time: 208.74, text: "也要和你举起回忆酿的甜" },
+            { time: 213.81, text: "和你再干一杯" },
+            { time: 217.53, text: "终究会有一天我们都变成昨天" },
+            { time: 223.26, text: "是你陪我走过一生一回匆匆的人间" },
+            { time: 229.23, text: "有一天就是今天今天就是有一天" },
+            { time: 234.96, text: "说出一直没说对你的感谢" },
+            { time: 240.18, text: "和你再干一杯" },
+            { time: 243.12, text: "再干一杯永远" },
+            { time: 246, text: "喝了就能万岁岁岁和年年" },
+            { time: 253.29, text: "时间都停了他们都回来了" },
+            { time: 259.29, text: "怀念的人啊等你的来到" },
+            { time: 264.9, text: "时间都停了他们都回来了" },
+            { time: 270.99, text: "怀念的人啊等你的来到" },
+            { time: 284.05, text: "弦乐编写：于京延 + 李琪", credit: true },
+            { time: 285.05, text: "弦乐演奏：李琪北京室内乐团", credit: true },
+            { time: 286.05, text: "冲绳三弦：REI（Spoon de chop）", credit: true },
+            { time: 287.05, text: "和声演唱：士杰 + 阿璞（八三夭）", credit: true },
+            { time: 288.05, text: "合唱：强辩 + 阿邦 + 小凯 + 阿沚", credit: true }
           ],
           base: "ending-04"
         }
@@ -16260,9 +16252,9 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
           note: "那些平常的日子，因为有您在，都成了小美满。"
         },
         {
-          summary: "把它放在最后，是想给这段共同经历留一点余温。",
-          why: "有些回忆不必急着说完，就让这首歌陪着它们，再多停留一会儿。",
-          note: "谢谢你来过，也谢谢后来，我们从初代同事成了朋友。"
+          summary: "这首歌写的是，时间一直往前走，但那些一起笑过、闹过、认真生活过的日子，会被回忆酿成一杯甜。人与人可能走向不同方向，真正的友情却不会因为离开而作废。",
+          why: "把它放在最后，是想为一起走过的日子碰一次杯。不是把告别写得很沉重，而是认真说一句谢谢，也约定以后哪怕不在同一张考勤表里，偶尔想起彼此，仍然可以自然地问候。",
+          note: "敬一起走过的日子，也敬以后各自闪闪发光。"
         }
       ];
 
@@ -16271,11 +16263,11 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
         { a: "#d9e7ff", b: "#8fd8ec", c: "#b79cff", symbol: "赠", label: "EVERY GIFT BECOMES LIGHT", effect: "gift" },
         { a: "#8ee2d1", b: "#a78cff", c: "#f0c67d", symbol: "风", label: "LET THE WIND CARRY US ON", effect: "wind" },
         { a: "#ffd18e", b: "#ff9fae", c: "#94d8e5", symbol: "满", label: "SMALL MOMENTS, FULL HEART", effect: "warm" },
-        { a: "#c7b7ff", b: "#ed9fca", c: "#87cddd", symbol: "半", label: "WORDS LEFT GENTLY UNSAID", effect: "eclipse" },
+        { a: "#ffd58a", b: "#f2a86f", c: "#9edbe8", symbol: "杯", label: "TO THE DAYS WE SHARED", effect: "toast" },
         { a: "#ffe09a", b: "#f3a6c8", c: "#9edcff", symbol: "∞", label: "FIVE SONGS · ONE STORY", effect: "finale" }
       ];
 
-      const SOUNDTRACK_STATE_KEY = "memorial_soundtrack_story_state_v1";
+      const SOUNDTRACK_STATE_KEY = "memorial_soundtrack_story_state_v2";
       const savedSoundtrackState = (() => {
         try {
           const raw = localStorage.getItem(SOUNDTRACK_STATE_KEY);
@@ -16629,29 +16621,62 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
               }
             });
           } else if (effectIndex === 4) {
-            // 小半：日蚀、墨色潮汐和碎光。
-            const cx = state.width * .5, cy = state.height * .42;
-            glow(cx, cy, Math.min(state.width, state.height) * .46, state.colors[1], .17);
-            const r = Math.min(state.width, state.height) * .15;
-            const eg = ctx.createRadialGradient(cx - r * .25, cy - r * .25, r * .08, cx, cy, r);
-            eg.addColorStop(0, `rgba(${state.colors[0].r},${state.colors[0].g},${state.colors[0].b},.95)`);
-            eg.addColorStop(1, `rgba(${state.colors[1].r},${state.colors[1].g},${state.colors[1].b},.12)`);
-            ctx.fillStyle = eg; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
-            ctx.fillStyle = 'rgba(2,3,12,.92)'; ctx.beginPath(); ctx.arc(cx + r * .48 + Math.sin(elapsed*.25)*r*.08, cy, r * .94, 0, Math.PI * 2); ctx.fill();
-            for (let line = 0; line < 7; line += 1) {
+            // 干杯：暖金碰杯、回忆光环与上升碎光。
+            const cx = state.width * .5, cy = state.height * .43;
+            const baseSize = Math.min(state.width, state.height);
+            glow(cx, cy, baseSize * .52, state.colors[0], .18);
+
+            for (let ring = 0; ring < 5; ring += 1) {
+              const phase = (elapsed * .17 + ring * .2) % 1;
+              const radius = baseSize * (.11 + phase * .42);
               ctx.beginPath();
-              for (let x = -20; x <= state.width + 20; x += 12) {
-                const y = state.height * (.66 + line * .045) + Math.sin(x * .014 + elapsed * (.35 + line * .04)) * (9 + line * 2.3);
-                if (x === -20) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-              }
-              const c = randomColor(line);
-              ctx.strokeStyle = `rgba(${c.r},${c.g},${c.b},${.11 - line*.009})`; ctx.lineWidth = 1.4; ctx.stroke();
+              ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+              ctx.strokeStyle = `rgba(${state.colors[ring % state.colors.length].r},${state.colors[ring % state.colors.length].g},${state.colors[ring % state.colors.length].b},${(1 - phase) * .16})`;
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
             }
+
+            const drawGlass = (x, y, direction, color) => {
+              ctx.save();
+              ctx.translate(x, y);
+              ctx.rotate(direction * (-.20 + Math.sin(elapsed * .8) * .018));
+              ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},.72)`;
+              ctx.lineWidth = Math.max(1.4, baseSize * .0024);
+              ctx.lineCap = 'round';
+              ctx.beginPath();
+              ctx.moveTo(-30, -48);
+              ctx.quadraticCurveTo(-26, 8, 0, 20);
+              ctx.quadraticCurveTo(26, 8, 30, -48);
+              ctx.moveTo(-30, -48);
+              ctx.lineTo(30, -48);
+              ctx.moveTo(0, 20);
+              ctx.lineTo(0, 58);
+              ctx.moveTo(-21, 58);
+              ctx.lineTo(21, 58);
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(-25, -21);
+              ctx.quadraticCurveTo(0, -10, 25, -21);
+              ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},.40)`;
+              ctx.stroke();
+              ctx.restore();
+            };
+
+            drawGlass(cx - 43, cy + 8, 1, state.colors[0]);
+            drawGlass(cx + 43, cy + 8, -1, state.colors[1]);
+
             state.particles.forEach((p, i) => {
-              p.y += .15 + p.speed * .16; p.x += Math.sin(elapsed * .5 + p.phase) * .18;
-              if (p.y > state.height + 20) { p.y = -20; p.x = Math.random() * state.width; }
-              ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.angle += p.spin * .2);
-              ctx.fillStyle = `rgba(${p.color.r},${p.color.g},${p.color.b},${p.a * .42})`; ctx.fillRect(-p.r*.8, -p.r*.18, p.r*1.6, p.r*.36); ctx.restore();
+              p.y -= .24 + p.speed * .34;
+              p.x += Math.sin(elapsed * .75 + p.phase) * .25;
+              if (p.y < -24) { p.y = state.height + 24; p.x = Math.random() * state.width; }
+              const pulse = .30 + (Math.sin(elapsed * (1.1 + p.speed) + p.phase) + 1) * .25;
+              if (i % 9 === 0) glow(p.x, p.y, 12 + p.r * 4, p.color, pulse * .13);
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate(p.angle += p.spin * .15);
+              ctx.fillStyle = `rgba(${p.color.r},${p.color.g},${p.color.b},${p.a * pulse})`;
+              ctx.fillRect(-p.r * .8, -p.r * .18, p.r * 1.6, p.r * .36);
+              ctx.restore();
             });
           } else {
             // 五首完成：星河隧道、五点星座与连续烟花。
