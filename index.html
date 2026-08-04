@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=yes, interactive-widget=resizes-content" />
   <meta name="theme-color" content="#080816" />
+  <meta name="kaoyu-build" content="song-meaning-fx-map-v1-20260804" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>有些同事，后来成了朋友 · 致敬烤鱼</title>
+  <title>私人入口</title>
+  
+  <!-- 加载优化版：相册按需扫描、照片懒探测、资源检测延后 -->
 
   <style>
     :root {
@@ -11101,6 +11104,391 @@
   }
 
 </style>
+
+<style id="mobile-enhancement-v34">
+  /* V34 手机增强版：用触屏等价交互补足桌面 hover，同时按设备能力分级。 */
+  @media (max-width: 820px), (pointer: coarse) {
+    body:not(.locked) main {
+      padding-bottom: calc(78px + var(--safe-bottom));
+    }
+
+    body:not(.locked) .soundtrack-section {
+      padding-bottom: calc(132px + var(--safe-bottom)) !important;
+    }
+
+    /* 手机底部章节导航：复用桌面导航，不额外复制页面结构。 */
+    html.is-mobile body:not(.locked) .story-nav {
+      display: flex !important;
+      position: fixed;
+      left: 9px;
+      right: 9px;
+      top: auto;
+      bottom: calc(var(--safe-bottom) + 8px);
+      z-index: 88;
+      width: auto;
+      max-width: none;
+      height: 62px;
+      gap: 3px;
+      padding: 6px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      transform: none;
+      opacity: 1;
+      pointer-events: auto;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      background: rgba(11,12,30,.94);
+      box-shadow: 0 14px 40px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.06);
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html.is-mobile .story-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    html.is-mobile .story-nav a {
+      flex: 0 0 50px;
+      min-width: 50px;
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 4px 3px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.48);
+      letter-spacing: .03em;
+      scroll-snap-align: center;
+    }
+
+    html.is-mobile .story-nav a span {
+      display: block !important;
+      max-width: none !important;
+      overflow: visible;
+      opacity: 1 !important;
+      font-size: 9px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    html.is-mobile .story-nav a i {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+    }
+
+    html.is-mobile .story-nav a.active {
+      color: #fff;
+      background: color-mix(in srgb, var(--gold) 12%, transparent);
+    }
+
+    html.is-mobile .story-nav a.active i {
+      transform: scale(1.25);
+    }
+
+    /* 手机点击照片时播放一次桌面端的扫光反馈。 */
+    html.is-mobile .photo-card::after {
+      display: block !important;
+      opacity: 0;
+      transform: translateX(-125%);
+    }
+
+    html.is-mobile .photo-card.mobile-sweep::after {
+      animation: mobilePhotoSweep .82s cubic-bezier(.2,.75,.2,1) both;
+    }
+
+    html.is-mobile .photo-card.mobile-press {
+      transform: scale(.985) !important;
+      transition-duration: .14s !important;
+    }
+
+    @keyframes mobilePhotoSweep {
+      0% { opacity: 0; transform: translateX(-125%); }
+      20% { opacity: .42; }
+      100% { opacity: 0; transform: translateX(125%); }
+    }
+
+    /* 星座在触屏上显示当前选中标签，避免只能看说明卡才知道点了谁。 */
+    html.is-mobile .memory-star.active span,
+    html.is-mobile .memory-star:focus-visible span {
+      display: block !important;
+      position: absolute;
+      left: 50%;
+      top: 25px;
+      z-index: 6;
+      transform: translateX(-50%);
+      color: #fff;
+      background: rgba(6,7,18,.88);
+      box-shadow: 0 8px 24px rgba(0,0,0,.28);
+      pointer-events: none;
+    }
+
+    /* 触屏按钮按压反馈。 */
+    html.is-mobile .playlist-item:active,
+    html.is-mobile .album-thumb:active,
+    html.is-mobile .memory-star:active,
+    html.is-mobile .story-step:active,
+    html.is-mobile .postcard:active {
+      transform: scale(.975) !important;
+    }
+
+    /* 标准手机仍保持轻量；高性能手机恢复适量玻璃感与背景层。 */
+    html.mobile-rich .visual-controls button,
+    html.mobile-rich .hero-photo-card,
+    html.mobile-rich .album-stage,
+    html.mobile-rich .constellation-card,
+    html.mobile-rich .soundtrack-card,
+    html.mobile-rich body:not(.locked) .story-nav {
+      background-color: rgba(12,14,34,.76);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+    }
+
+    html.mobile-rich .farewell-beams i:nth-child(3),
+    html.mobile-rich .farewell-papers i:nth-child(5),
+    html.mobile-rich .farewell-papers i:nth-child(6),
+    html.mobile-rich .dream-sparkles i:nth-child(n+10):nth-child(-n+14),
+    html.mobile-rich .meteor-c {
+      display: block !important;
+    }
+
+    html.mobile-rich .aurora-blob {
+      opacity: .10;
+      filter: blur(76px);
+    }
+
+    html.mobile-rich .hero-cosmos {
+      opacity: .43;
+    }
+  }
+
+  @media (max-width: 380px) {
+    html.is-mobile .story-nav a {
+      flex-basis: 46px;
+      min-width: 46px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.is-mobile .photo-card.mobile-sweep::after {
+      animation: none;
+    }
+  }
+</style>
+
+
+  <style id="privateMailboxStyles">
+    .reply-mail-form { width: min(820px, calc(100% - 34px)); }
+    .reply-choice-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+      width: min(560px, 100%);
+      margin: 4px auto 0;
+    }
+    .reply-choice-card {
+      min-width: 0;
+      margin: 0;
+      padding: 17px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,.025);
+    }
+    .reply-choice-card legend {
+      padding: 0 7px;
+      color: rgba(255,255,255,.72);
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+    .reply-radio {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 8px;
+      border-radius: 13px;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .reply-radio:hover { background: rgba(255,255,255,.045); }
+    .reply-radio:active { transform: scale(.985); }
+    .reply-radio input { margin-top: 4px; accent-color: var(--gold); }
+    .reply-radio span { display: grid; gap: 3px; min-width: 0; }
+    .reply-radio b { color: rgba(255,255,255,.88); font-size: 13px; font-weight: 600; }
+    .reply-radio small { color: rgba(255,255,255,.42); font-size: 10px; line-height: 1.55; }
+    .reply-custom-date { display: grid; gap: 7px; padding: 10px 8px 2px; }
+    .reply-custom-date[hidden] { display: none; }
+    .reply-custom-date label { color: rgba(255,255,255,.55); letter-spacing: .08em; }
+    .reply-custom-date input,
+    .reply-lookup-row input {
+      min-width: 0;
+      padding: 11px 13px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 12px;
+      outline: none;
+      color: rgba(255,255,255,.9);
+      color-scheme: dark;
+      background: rgba(255,255,255,.045);
+    }
+    .reply-mail-actions { flex-wrap: wrap; }
+    .reply-mail-actions button:disabled { opacity: .55; cursor: wait; }
+    .reply-saved.success { border-color: rgba(142, 222, 177, .28); color: #c8f1d9; }
+    .reply-saved.error { border-color: rgba(255, 126, 142, .28); color: #ffc7cf; }
+    .reply-mailbox-panel {
+      position: relative;
+      z-index: 5;
+      width: min(820px, calc(100% - 34px));
+      margin: 24px auto 46px;
+      padding: clamp(20px, 4vw, 30px);
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 24px;
+      background: rgba(8,10,26,.90);
+      box-shadow: 0 24px 70px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.05);
+    }
+    .reply-mailbox-panel[hidden] { display: none; }
+    .reply-mailbox-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 17px;
+    }
+    .reply-mailbox-head small { color: var(--gold); font-size: 9px; letter-spacing: .17em; }
+    .reply-mailbox-head h3 { margin: 5px 0 0; font: 500 25px/1.25 "Songti SC","STSong",serif; }
+    .reply-mailbox-head button,
+    .reply-lookup-row button {
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 999px;
+      color: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.055);
+      cursor: pointer;
+    }
+    .reply-lookup-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 10px; }
+    .reply-mailbox-status { min-height: 20px; margin: 13px 2px; color: rgba(255,255,255,.46); font-size: 11px; }
+    .reply-mailbox-status.error { color: #ffc2ca; }
+    .reply-mailbox-list { display: grid; gap: 12px; }
+    .reply-mail-item {
+      padding: 17px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 17px;
+      background: rgba(255,255,255,.035);
+    }
+    .reply-mail-item.sealed {
+      background: linear-gradient(135deg, rgba(169,155,234,.07), rgba(255,255,255,.02));
+    }
+    .reply-mail-meta,
+    .reply-mail-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+    .reply-mail-meta span {
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.57);
+      background: rgba(255,255,255,.05);
+      font-size: 9px;
+    }
+    .reply-mail-content {
+      margin: 14px 0;
+      color: rgba(255,255,255,.82);
+      font: 17px/1.85 "Kaiti SC","STKaiti","KaiTi",serif;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .reply-mail-footer { justify-content: space-between; color: rgba(255,255,255,.36); }
+    .reply-mail-footer code { color: var(--gold); font: 11px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .reply-mail-footer small { font-size: 9px; }
+    .reply-mail-empty { padding: 28px 12px; color: rgba(255,255,255,.40); text-align: center; }
+
+    .reply-subchoices {
+      display: grid;
+      gap: 2px;
+      margin: 8px 6px 2px 28px;
+      padding: 8px;
+      border-left: 2px solid rgba(234,201,137,.22);
+      border-radius: 0 13px 13px 0;
+      background: rgba(255,255,255,.018);
+    }
+    .reply-subchoices[hidden] { display: none; }
+    .reply-mail-thread-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .reply-mail-thread {
+      padding: 13px 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      background: rgba(255,255,255,.025);
+    }
+    .reply-mail-thread-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 7px;
+      color: rgba(255,255,255,.47);
+      font-size: 10px;
+    }
+    .reply-mail-thread-head strong {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .reply-mail-thread-body {
+      margin: 0;
+      color: rgba(255,255,255,.84);
+      font: 16px/1.75 "Kaiti SC","STKaiti","KaiTi",serif;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .reply-mail-no-response {
+      margin-top: 12px;
+      color: rgba(255,255,255,.34);
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 720px) {
+      .reply-choice-grid { grid-template-columns: 1fr; }
+      .reply-mail-form { margin-top: 30px; padding: 22px 17px; }
+      .reply-lookup-row { grid-template-columns: 1fr; }
+      .reply-lookup-row button { width: 100%; }
+      .reply-mailbox-head h3 { font-size: 22px; }
+    }
+  </style>
+
+
+  <style id="audio-stability-v5-style">
+    /* 最终曲快速流式模式：起播或网络等待时暂停非必要背景动画。 */
+    body.audio-stability-mode .stars,
+    body.audio-stability-mode .aurora-blob,
+    body.audio-stability-mode .farewell-beams i,
+    body.audio-stability-mode .farewell-ripples i,
+    body.audio-stability-mode .farewell-papers i,
+    body.audio-stability-mode .hero-orb,
+    body.audio-stability-mode .orbit,
+    body.audio-stability-mode .meteor,
+    body.audio-stability-mode .quote-orbit,
+    body.audio-stability-mode .marquee-track {
+      animation-play-state: paused !important;
+    }
+
+    body.audio-stability-mode .grain,
+    body.audio-stability-mode .cursor-aura {
+      display: none !important;
+    }
+
+    @media (max-width: 820px), (pointer: coarse) {
+      body.audio-stability-mode .soundtrack-card,
+      body.audio-stability-mode .lyrics-panel,
+      body.audio-stability-mode .visual-controls button {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="locked" data-theme="cosmic">
@@ -11113,6 +11501,7 @@
       <div class="resource-folder-alert-missing" id="resourceFolderAlertMissing"></div>
       <div class="resource-folder-alert-actions">
         <button class="resource-retry-btn" id="resourceFolderRetry" type="button">重新检测</button>
+        <button id="resourceFolderContinue" type="button">暂时继续</button>
       </div>
     </div>
   </div>
@@ -11134,8 +11523,8 @@
       <div class="memory-lock-kicker">MEMORY PASSWORD</div>
       <h2 class="memory-lock-title">先输入回忆密码</h2>
       <p class="memory-lock-copy">
-        这是写给烤鱼的专属入口。<br>
-        输入正确的生日密码，回忆才会慢慢打开。
+        这里藏着一封只属于某个人的回忆信。<br>
+        输入正确的密码，让回忆慢慢打开。
       </p>
       <div class="memory-lock-form">
         <div class="memory-lock-input-shell">
@@ -11304,7 +11693,7 @@
               <div class="hero-photo-frame">
                 <div class="hero-photo-mat"></div>
                 <div class="hero-photo-glow"></div>
-                <img id="heroPhotoPreview" class="hero-photo-preview" alt="你们的纪念照片" />
+                <img id="heroPhotoPreview" class="hero-photo-preview" alt="你们的纪念照片" decoding="async" fetchpriority="high" />
                 <div class="hero-photo-corner hero-photo-corner-a"></div>
                 <div class="hero-photo-corner hero-photo-corner-b"></div>
                 <div class="hero-photo-corner hero-photo-corner-c"></div>
@@ -11443,7 +11832,6 @@
           <div class="section-label">03 · OUR MOMENTS</div>
           <h2 class="section-title">一些当时觉得普通，<br>后来却很珍贵的瞬间。</h2>
           <p class="section-copy">
-            这里先使用示例画面。正式制作时，可以替换成你们的合照、
             工位照片、团建、聚餐，以及那些不完美但很真实的抓拍。
           </p>
         </div>
@@ -11476,19 +11864,14 @@
           <article class="photo-card reveal" data-index="4">
             <div class="tape"></div>
             <div class="photo-image"></div>
-            <div class="photo-caption">愿下一次出发，不只是挑战自我，而是带着轻松与期待，认真去看一看更大的世界。</div>
+            <div class="photo-caption">并不完美，却真实存在的蒙山回忆。</div>
           </article>
 
           <article class="photo-card reveal" data-index="5">
             <div class="tape"></div>
             <div class="photo-image"></div>
-            <div class="photo-caption">如果以后真的去了西安，就把新的故事留给城墙晚风，把想说的话慢慢说完。</div>
+            <div class="photo-caption">往后走吧，后面也一定会有惊喜。</div>
           </article>
-        </div>
-
-        <div class="photo-memory-tools reveal">
-          <button type="button" id="randomMemoryPhoto">随机翻一张回忆</button>
-          <span id="randomMemoryHint">每一次点击，都从照片墙里抽出一个瞬间。</span>
         </div>
       </div>
     </section>
@@ -11517,7 +11900,7 @@
                 <div class="projector-beam" aria-hidden="true"></div>
                 <div class="film-scratches" aria-hidden="true"></div>
                 <div class="film-frame-line" aria-hidden="true"></div>
-                <img id="albumMainImage" class="album-main-image" alt="回忆相册照片" />
+                <img id="albumMainImage" class="album-main-image" alt="回忆相册照片" loading="lazy" decoding="async" fetchpriority="low" />
               </div>
             </div>
 
@@ -11861,24 +12244,69 @@
     <section class="future-reply-section cinematic-section" id="futureReply">
       <div class="content">
         <div class="reveal">
-          <div class="section-label">BONUS 03 · A REPLY TO THE FUTURE</div>
-          <h2 class="section-title">这封信不一定只能被读完，<br>也可以留下一句回信。</h2>
+          <div class="section-label">BONUS 03 · A TWO-WAY MEMORY POST OFFICE</div>
+          <h2 class="section-title">这封信不一定只能被读完，<br>也可以真的寄到邮箱里。</h2>
           <p class="section-copy">
-            写一句现在想说的话，把它折成纸飞机送往以后。
-            内容只会保存在当前设备里，像一枚不会上传到任何地方的小小时间胶囊。
+            可以写给未来的自己，也可以写给我们俩。信会先保存在回忆邮局，再按照你选择的时间发往对应 QQ 邮箱。
+            对方直接回复邮件后，回复也会回到这里。
           </p>
         </div>
 
         <div class="reply-stage reveal" id="replyStage">
-          <form class="reply-form" id="replyForm">
-            <label for="futureReplyText">写给以后的一句话</label>
-            <textarea id="futureReplyText" maxlength="88" placeholder="比如：等很久以后，再问一句‘还活着吗？’"></textarea>
-            <div class="reply-hint">最多 88 个字 · 只保存在这个浏览器里</div>
-            <div class="reply-actions">
-              <button type="submit" id="launchReply">折成纸飞机</button>
-              <button type="button" id="clearReply">清空这封回信</button>
+          <form class="reply-form reply-mail-form" id="replyForm">
+            <label for="futureReplyText">写下这封信</label>
+            <textarea id="futureReplyText" maxlength="500" placeholder="不必写得很正式，想到什么就写什么。"></textarea>
+
+            <div class="reply-choice-grid">
+              <fieldset class="reply-choice-card">
+                <legend>这封信寄去哪里？</legend>
+
+                <label class="reply-radio">
+                  <input type="radio" name="replyRecipientMode" value="self" checked>
+                  <span><b>写给未来的自己</b><small>寄往属于自己的固定邮箱，等未来某一天再收到</small></span>
+                </label>
+
+                <label class="reply-radio">
+                  <input type="radio" name="replyRecipientMode" value="us">
+                  <span><b>写给我们俩</b><small>可以只寄给其中一个人，也可以两个人都收到</small></span>
+                </label>
+
+                <div class="reply-subchoices" id="replyUsTargetWrap" hidden>
+                  <label class="reply-radio"><input type="radio" name="replyUsTarget" value="madaha"><span><b>马大哈</b><small>只寄给马大哈</small></span></label>
+                  <label class="reply-radio"><input type="radio" name="replyUsTarget" value="goudongxi"><span><b>狗东西</b><small>只寄给狗东西</small></span></label>
+                  <label class="reply-radio"><input type="radio" name="replyUsTarget" value="all" checked><span><b>全部</b><small>马大哈和狗东西各收到一封</small></span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="reply-choice-card">
+                <legend>什么时候送达？</legend>
+                <label class="reply-radio"><input type="radio" name="replyDelivery" value="now" checked><span><b>现在送达</b><small>寄出后立即进入邮件投递</small></span></label>
+                <label class="reply-radio"><input type="radio" name="replyDelivery" value="year"><span><b>一年以后</b><small>先在回忆邮局里封存整整一年</small></span></label>
+                <label class="reply-radio"><input type="radio" name="replyDelivery" value="custom"><span><b>选择一个日期</b><small>到你选定的时间再发送邮件</small></span></label>
+                <div class="reply-custom-date" id="replyCustomDateWrap" hidden>
+                  <label for="replyCustomDate">送达时间</label>
+                  <input type="datetime-local" id="replyCustomDate">
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="reply-hint" id="replyHint">最多 500 个字 · 未寄出的内容保存在当前设备 · 邮件回复约 1 分钟后同步到网页</div>
+            <div class="reply-actions reply-mail-actions">
+              <button type="submit" id="launchReply">寄出这封信</button>
+              <button type="button" id="clearReply">清空草稿</button>
+              <button type="button" id="viewReplies">查看邮箱回复</button>
             </div>
           </form>
+
+          <section class="reply-mailbox-panel" id="replyMailboxPanel" hidden aria-live="polite">
+            <div class="reply-mailbox-head">
+              <div><small>EMAIL REPLIES</small><h3>从邮箱寄回来的话</h3></div>
+              <button type="button" id="closeReplies">收起</button>
+            </div>
+            <div class="reply-mailbox-status" id="replyMailboxStatus"></div>
+            <div class="reply-mailbox-list" id="replyMailboxList"></div>
+          </section>
+
           <div class="paper-plane" id="paperPlane" aria-hidden="true"></div>
           <div class="reply-saved" id="replySaved"></div>
         </div>
@@ -12779,7 +13207,7 @@
                 <div class="vinyl-grooves"></div>
                 <div class="vinyl-label">
                   <span>TO 烤鱼</span>
-                  <strong>一路生花</strong>
+                  <strong>小美满</strong>
                   <small>FROM 马大哈</small>
                 </div>
               </div>
@@ -12788,41 +13216,36 @@
 
             <div class="track-meta">
               <span class="track-kicker" id="trackKicker">ENDING SOUNDTRACK</span>
-              <h3 id="trackTitle">一路生花</h3>
-              <p id="trackArtist">作词：宋普照 · 作曲：张博文 · 编曲：李师珏</p>
+              <h3 id="trackTitle">小美满</h3>
+              <p id="trackArtist">周深</p>
             </div>
 
             
             <div class="soundtrack-playlist premium-playlist" id="soundtrackPlaylist">
               <button class="playlist-item active" type="button" data-track="0">
                 <span class="playlist-index">01</span>
-                <i class="playlist-cover cover-flower" aria-hidden="true"></i>
-                <span class="playlist-meta"><strong>一路生花</strong><em>宋普照 / 张博文 / 李师珏</em></span>
-                <small>原版保留 · 已同步歌词</small>
+                <i class="playlist-cover cover-c" aria-hidden="true"></i>
+                <span class="playlist-meta"><strong>小美满</strong><em>周深</em></span>
               </button>
               <button class="playlist-item" type="button" data-track="1">
                 <span class="playlist-index">02</span>
                 <i class="playlist-cover cover-a" aria-hidden="true"></i>
                 <span class="playlist-meta"><strong>世界赠予我的</strong><em>王菲</em></span>
-                <small>已同步歌词</small>
               </button>
               <button class="playlist-item" type="button" data-track="2">
                 <span class="playlist-index">03</span>
                 <i class="playlist-cover cover-b" aria-hidden="true"></i>
                 <span class="playlist-meta"><strong>起风了</strong><em>吴青峰</em></span>
-                <small>已同步歌词</small>
               </button>
               <button class="playlist-item" type="button" data-track="3">
                 <span class="playlist-index">04</span>
-                <i class="playlist-cover cover-c" aria-hidden="true"></i>
-                <span class="playlist-meta"><strong>小美满</strong><em>周深</em></span>
-                <small>已同步歌词</small>
+                <i class="playlist-cover cover-d" aria-hidden="true"></i>
+                <span class="playlist-meta"><strong>干杯</strong><em>五月天</em></span>
               </button>
               <button class="playlist-item" type="button" data-track="4">
                 <span class="playlist-index">05</span>
-                <i class="playlist-cover cover-d" aria-hidden="true"></i>
-                <span class="playlist-meta"><strong>干杯</strong><em>五月天</em></span>
-                <small>已同步歌词</small>
+                <i class="playlist-cover cover-flower" aria-hidden="true"></i>
+                <span class="playlist-meta"><strong>一路生花</strong><em>宋普照 / 张博文 / 李师珏</em></span>
               </button>
             </div>
 
@@ -12907,7 +13330,7 @@
           <div class="song-meaning-content">
             <div class="story-content-stage">
               <div class="song-meaning-kicker" id="songMeaningKicker">SONG NOTE</div>
-              <h3 class="song-meaning-title" id="songMeaningTitle">一路生花</h3>
+              <h3 class="song-meaning-title" id="songMeaningTitle">小美满</h3>
               <div class="song-meaning-subtitle" id="songMeaningSubtitle">这首歌背后的含义</div>
               <div class="story-divider" aria-hidden="true"><i></i></div>
 
@@ -13037,6 +13460,18 @@
 
       const heroPhotoPreview = document.getElementById("heroPhotoPreview");
       const heroPhotoCard = document.querySelector(".hero-photo-card");
+      let resolveFirstPageReady;
+      let firstPageReadySettled = false;
+      window.__memorialFirstPageReady = new Promise(resolve => {
+        resolveFirstPageReady = resolve;
+      });
+
+      function markFirstPageReady(detail = {}) {
+        if (firstPageReadySettled) return;
+        firstPageReadySettled = true;
+        resolveFirstPageReady?.(detail);
+      }
+
       const defaultHeroPhoto = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%201000%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%236c7aa8%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2252%25%22%20stop-color%3D%22%238f74a8%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23d7ad97%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Crect%20x%3D%2248%22%20y%3D%2248%22%20width%3D%22704%22%20height%3D%22904%22%20rx%3D%2230%22%20fill%3D%22rgba%28255%2C255%2C255%2C.08%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.3%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%22535%22%20cy%3D%22210%22%20r%3D%2292%22%20fill%3D%22%23fff4d0%22%20opacity%3D%220.9%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20690C126%20620%20237%20605%20341%20643C426%20674%20494%20748%20589%20765C654%20777%20725%20757%20800%20715V1000H0Z%22%20fill%3D%22%23314669%22%20opacity%3D%220.9%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20750C117%20715%20206%20710%20296%20744C382%20776%20452%20841%20551%20857C634%20869%20709%20844%20800%20806V1000H0Z%22%20fill%3D%22%231b2940%22%20opacity%3D%220.96%22/%3E%0A%20%20%3Ccircle%20cx%3D%22226%22%20cy%3D%22278%22%20r%3D%225%22%20fill%3D%22%23fff%22%20opacity%3D%220.85%22/%3E%0A%20%20%3Ccircle%20cx%3D%22268%22%20cy%3D%22328%22%20r%3D%224%22%20fill%3D%22%23ffe3b0%22%20opacity%3D%220.8%22/%3E%0A%20%20%3Ccircle%20cx%3D%22606%22%20cy%3D%22335%22%20r%3D%224%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22/%3E%0A%20%20%3Cg%20fill%3D%22%23ffffff%22%20opacity%3D%220.22%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22402%22%20cy%3D%22140%22%20r%3D%2252%22/%3E%0A%20%20%3C/g%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22468%22%20text-anchor%3D%22middle%22%20fill%3D%22%23fff8ef%22%20font-size%3D%2240%22%20font-family%3D%22PingFang%20SC%2C%20Microsoft%20YaHei%2C%20sans-serif%22%20letter-spacing%3D%224%22%3E%E6%8A%8A%E4%B8%80%E5%BC%A0%E6%83%B3%E7%95%99%E4%BD%8F%E7%9A%84%E7%85%A7%E7%89%87%3C/text%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22530%22%20text-anchor%3D%22middle%22%20fill%3D%22%23fff8ef%22%20font-size%3D%2240%22%20font-family%3D%22PingFang%20SC%2C%20Microsoft%20YaHei%2C%20sans-serif%22%20letter-spacing%3D%224%22%3E%E6%94%BE%E5%9C%A8%E8%BF%99%E9%87%8C%3C/text%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22620%22%20text-anchor%3D%22middle%22%20fill%3D%22rgba%28255%2C255%2C255%2C.88%29%22%20font-size%3D%2224%22%20font-family%3D%22PingFang%20SC%2C%20Microsoft%20YaHei%2C%20sans-serif%22%3E%E6%8A%8A%E7%85%A7%E7%89%87%E6%94%BE%E5%88%B0%20images/hero-photo.jpg%20%E5%8D%B3%E5%8F%AF%E8%87%AA%E5%8A%A8%E6%9B%BF%E6%8D%A2%3C/text%3E%0A%3C/svg%3E";
       const localHeroPhotoCandidates = [
         "images/hero-photo.jpg",
@@ -13047,11 +13482,84 @@
         "hero-photo.png"
       ];
 
+      function memorialResolveResourceUrl(path) {
+        /* 某些网页导入器会把页面放进 blob:/about: 容器，document.baseURI 可能不是可拼接 URL。
+           解析失败时直接保留相对路径，交给浏览器/导入器处理。 */
+        try {
+          return new URL(path, document.baseURI).href;
+        } catch (_) {
+          return path;
+        }
+      }
+
+      async function memorialResourceExists(path, timeout = 8000) {
+        const url = memorialResolveResourceUrl(path);
+        const cleanPath = String(path).split(/[?#]/, 1)[0].toLowerCase();
+        const isImage = /\.(?:jpg|jpeg|png|webp|gif|avif|svg)$/.test(cleanPath);
+        const isAudio = /\.mp3$/.test(cleanPath);
+
+        if (isImage) {
+          return new Promise(resolve => {
+            const image = new Image();
+            let settled = false;
+            const finish = value => {
+              if (settled) return;
+              settled = true;
+              window.clearTimeout(timer);
+              image.onload = null;
+              image.onerror = null;
+              resolve(value);
+            };
+            const timer = window.setTimeout(() => finish(false), timeout);
+            image.onload = () => finish(true);
+            image.onerror = () => finish(false);
+            image.src = path;
+          });
+        }
+
+        if (isAudio) {
+          return new Promise(resolve => {
+            const probe = document.createElement("audio");
+            let settled = false;
+            const finish = value => {
+              if (settled) return;
+              settled = true;
+              window.clearTimeout(timer);
+              probe.onloadedmetadata = null;
+              probe.oncanplay = null;
+              probe.onerror = null;
+              probe.removeAttribute("src");
+              try { probe.load(); } catch (_) {}
+              resolve(value);
+            };
+            const timer = window.setTimeout(() => finish(false), timeout);
+            probe.preload = "metadata";
+            probe.onloadedmetadata = () => finish(true);
+            probe.oncanplay = () => finish(true);
+            probe.onerror = () => finish(false);
+            probe.src = path;
+            try { probe.load(); } catch (_) { finish(false); }
+          });
+        }
+
+        return false;
+      }
+
+      window.__memorialResolveResourceUrl = memorialResolveResourceUrl;
+      window.__memorialResourceExists = memorialResourceExists;
+
       function setHeroPhoto(src, hasLocal = false) {
-        if (!heroPhotoPreview) return;
+        if (!heroPhotoPreview) {
+          markFirstPageReady({ hasLocal: false, src: "" });
+          return;
+        }
         heroPhotoPreview.classList.remove("loaded");
         heroPhotoPreview.onload = () => {
           heroPhotoPreview.classList.add("loaded");
+          markFirstPageReady({ hasLocal, src });
+        };
+        heroPhotoPreview.onerror = () => {
+          markFirstPageReady({ hasLocal: false, src });
         };
         heroPhotoPreview.src = src;
         heroPhotoCard?.classList.toggle("has-local-photo", hasLocal);
@@ -13062,10 +13570,22 @@
           setHeroPhoto(defaultHeroPhoto, false);
           return;
         }
-        const testImg = new Image();
+
         const candidate = localHeroPhotoCandidates[index];
-        testImg.onload = () => setHeroPhoto(candidate, true);
-        testImg.onerror = () => loadLocalHeroPhoto(index + 1);
+        const testImg = new Image();
+        let settled = false;
+        const finish = found => {
+          if (settled) return;
+          settled = true;
+          window.clearTimeout(timer);
+          testImg.onload = null;
+          testImg.onerror = null;
+          if (found) setHeroPhoto(candidate, true);
+          else loadLocalHeroPhoto(index + 1);
+        };
+        const timer = window.setTimeout(() => finish(false), 8000);
+        testImg.onload = () => finish(true);
+        testImg.onerror = () => finish(false);
         testImg.src = candidate;
       }
 
@@ -13177,14 +13697,17 @@
 
         const img = document.createElement("img");
         img.alt = photoData[index].label;
-        img.loading = "lazy";
+        img.loading = "eager";
         img.decoding = "async";
-        img.onload = () => {
+        const showImage = () => {
           holder.classList.remove("is-loading");
           requestAnimationFrame(() => img.classList.add("loaded"));
         };
-        img.src = src;
+        img.onload = showImage;
+        img.onerror = () => holder.classList.remove("is-loading");
         holder.replaceChildren(img);
+        img.src = src;
+        if (img.complete && img.naturalWidth > 0) showImage();
 
         card.classList.add("has-local-photo");
         resolvedMemoryPhotos[index] = {
@@ -13194,20 +13717,71 @@
         };
       }
 
+      const memoryPhotoProbePromises = new Array(photoCards.length).fill(null);
+      let ourMomentsPreloadPromise = null;
+
+      function memoryPhotoCandidatesFor(index) {
+        const number = String(index + 1).padStart(2, "0");
+        return memoryPhotoExtensions.map(ext => `images/memory-${number}.${ext}`);
+      }
+
       function tryMemoryPhoto(card, index, candidateIndex = 0) {
-        if (candidateIndex >= memoryPhotoExtensions.length) return;
-        const ext = memoryPhotoExtensions[candidateIndex];
-        const src = `images/memory-${String(index + 1).padStart(2, "0")}.${ext}`;
-        const probe = new Image();
-        probe.onload = () => setMemoryPhoto(card, index, src, probe.naturalWidth, probe.naturalHeight);
-        probe.onerror = () => tryMemoryPhoto(card, index, candidateIndex + 1);
-        probe.src = src;
+        const candidates = memoryPhotoCandidatesFor(index);
+        if (candidateIndex >= candidates.length) return Promise.resolve(false);
+
+        const src = candidates[candidateIndex];
+        return new Promise(resolve => {
+          const probe = new Image();
+          let settled = false;
+          const finish = value => {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(timer);
+            probe.onload = null;
+            probe.onerror = null;
+            resolve(value);
+          };
+          const timer = window.setTimeout(() => {
+            finish(tryMemoryPhoto(card, index, candidateIndex + 1));
+          }, 8000);
+
+          probe.onload = () => {
+            setMemoryPhoto(card, index, src, probe.naturalWidth, probe.naturalHeight);
+            finish(true);
+          };
+          probe.onerror = () => {
+            finish(tryMemoryPhoto(card, index, candidateIndex + 1));
+          };
+          /* 保留字面相对路径，网页导入器才能按原目录映射图片。 */
+          probe.src = src;
+        }).then(value => value instanceof Promise ? value : value);
+      }
+
+      function startMemoryPhotoProbe(card, index) {
+        if (!card || index < 0) return Promise.resolve(false);
+        if (memoryPhotoProbePromises[index]) return memoryPhotoProbePromises[index];
+        card.dataset.photoProbeStarted = "1";
+        memoryPhotoProbePromises[index] = Promise.resolve(tryMemoryPhoto(card, index))
+          .catch(() => false);
+        return memoryPhotoProbePromises[index];
       }
 
       photoCards.forEach((card, index) => {
-        card.querySelector(".photo-image").innerHTML = createPhotoSVG(photoData[index], index);
-        tryMemoryPhoto(card, index);
+        const holder = card.querySelector(".photo-image");
+        if (holder) holder.innerHTML = createPhotoSVG(photoData[index], index);
+        /* 与旧版一致：页面初始化后立刻寻找图片，不依赖滚动观察器。 */
+        startMemoryPhotoProbe(card, index);
       });
+
+      function preloadOurMomentsPhotos() {
+        if (ourMomentsPreloadPromise) return ourMomentsPreloadPromise;
+        ourMomentsPreloadPromise = Promise.all(
+          photoCards.map((card, index) => startMemoryPhotoProbe(card, index))
+        );
+        return ourMomentsPreloadPromise;
+      }
+
+      window.__preloadOurMoments = preloadOurMomentsPhotos;
 
       /* ==================== 滚动出现 ==================== */
 
@@ -13271,6 +13845,7 @@
 
       /* ==================== 本地相册轮播 ==================== */
 
+      const albumGallery = document.getElementById("albumGallery");
       const albumMainFrame = document.getElementById("albumMainFrame");
       const albumMainImage = document.getElementById("albumMainImage");
       const albumCounter = document.getElementById("albumCounter");
@@ -13286,6 +13861,10 @@
       let currentAlbumIndex = 0;
       let albumAutoTimer = null;
       let albumShuffleDeck = [];
+      let albumLoadStarted = false;
+      let albumLoadPromise = null;
+      const ALBUM_SCAN_LIMIT = 99;
+      const ALBUM_CONSECUTIVE_MISS_LIMIT = 8;
 
       function refillAlbumShuffleDeck() {
         albumShuffleDeck = albumItems
@@ -13348,6 +13927,11 @@
           albumMainImage.alt = item.title;
           albumMainImage.onload = () => {
             if (token !== albumSwitchToken) return;
+            if (albumMainImage.naturalWidth && albumMainImage.naturalHeight) {
+              item.width = albumMainImage.naturalWidth;
+              item.height = albumMainImage.naturalHeight;
+              albumMainFrame?.style.setProperty("--album-ratio", `${item.width} / ${item.height}`);
+            }
             albumMainImage.classList.add("loaded");
             setTimeout(() => albumMainFrame?.classList.remove("switching"), reduceMotion ? 0 : 360);
           };
@@ -13382,7 +13966,7 @@
           btn.type = "button";
           btn.className = "album-thumb";
           btn.dataset.indexLabel = String(index + 1).padStart(2, "0");
-          btn.innerHTML = `<img src="${item.src}" alt="${item.title}">`;
+          btn.innerHTML = `<img src="${item.src}" alt="${item.title}" loading="lazy" decoding="async">`;
           btn.addEventListener("click", () => {
             renderAlbum(index);
             restartAlbumAutoPlay();
@@ -13410,55 +13994,132 @@
 
       function tryAlbumImage(index, extIndex = 0) {
         if (extIndex >= albumExtensions.length) return Promise.resolve(null);
+
+        const number = String(index).padStart(2, "0");
         const ext = albumExtensions[extIndex];
-        const src = `images/album/album-${String(index).padStart(2, "0")}.${ext}`;
+        const src = `images/album/album-${number}.${ext}`;
+
         return new Promise(resolve => {
           const probe = new Image();
-          probe.onload = () => resolve({
+          let settled = false;
+          const finish = value => {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(timer);
+            probe.onload = null;
+            probe.onerror = null;
+            resolve(value);
+          };
+          const timer = window.setTimeout(() => {
+            finish(tryAlbumImage(index, extIndex + 1));
+          }, 8000);
+
+          probe.onload = () => finish({
             src,
-            width: probe.naturalWidth || 4,
-            height: probe.naturalHeight || 5,
+            width: Math.max(1, probe.naturalWidth || 4),
+            height: Math.max(1, probe.naturalHeight || 5),
             order: index,
-            title: `回忆相册 · 第 ${String(index).padStart(2, "0")} 张`,
+            title: `回忆相册 · 第 ${number} 张`,
             description: `这张照片被收进了回忆胶片里，会和其他照片一起随机轮播。`
           });
-          probe.onerror = async () => resolve(await tryAlbumImage(index, extIndex + 1));
+          probe.onerror = () => finish(tryAlbumImage(index, extIndex + 1));
+          /* 不转换为 blob:/file: 绝对地址，保持导入器可识别的相对路径。 */
           probe.src = src;
         });
       }
 
-      async function loadAlbumImages() {
-        const tasks = [];
-        for (let i = 1; i <= 99; i += 1) {
-          tasks.push(tryAlbumImage(i));
-        }
-        const results = await Promise.all(tasks);
-        results.filter(Boolean).forEach(item => albumItems.push(item));
-        finalizeAlbumLoading();
+      function loadAlbumImages() {
+        if (albumLoadPromise) return albumLoadPromise;
+        albumLoadStarted = true;
+
+        albumLoadPromise = (async () => {
+          await (window.__memorialFirstPageReady || Promise.resolve());
+          await window.__preloadOurMoments?.();
+          albumCounter && (albumCounter.textContent = "PROJECTOR · LOADING");
+          albumDescription && (albumDescription.textContent = "正在读取回忆胶片，请稍等…");
+
+          const BATCH_SIZE = 8;
+          let consecutiveMisses = 0;
+
+          for (let start = 1; start <= ALBUM_SCAN_LIMIT; start += BATCH_SIZE) {
+            while (window.__memorialNetworkPriority === "soundtrack-first") {
+              albumDescription && (albumDescription.textContent = "正在优先处理音乐缓存，相册稍后继续读取…");
+              await new Promise(resolve => window.setTimeout(resolve, 160));
+            }
+
+            const end = Math.min(ALBUM_SCAN_LIMIT, start + BATCH_SIZE - 1);
+            const indices = Array.from({ length: end - start + 1 }, (_, offset) => start + offset);
+            const results = await Promise.all(indices.map(index => tryAlbumImage(index)));
+
+            for (const item of results) {
+              if (item) {
+                albumItems.push(item);
+                consecutiveMisses = 0;
+              } else {
+                consecutiveMisses += 1;
+              }
+            }
+
+            albumDescription && (albumDescription.textContent = `正在读取回忆胶片…已发现 ${albumItems.length} 张`);
+            if (consecutiveMisses >= ALBUM_CONSECUTIVE_MISS_LIMIT) break;
+            await new Promise(resolve => window.setTimeout(resolve, 0));
+          }
+
+          finalizeAlbumLoading();
+          return albumItems;
+        })();
+
+        return albumLoadPromise;
       }
 
+      function scheduleAlbumLoading({ immediate = false } = {}) {
+        if (albumLoadPromise) return albumLoadPromise;
+        if (immediate) return loadAlbumImages();
+
+        albumLoadPromise = new Promise(resolve => {
+          const start = () => {
+            // Clear the scheduling placeholder before starting the real promise.
+            albumLoadPromise = null;
+            Promise.resolve(loadAlbumImages()).then(resolve, resolve);
+          };
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(start, { timeout: 1800 });
+          } else {
+            window.setTimeout(start, 160);
+          }
+        });
+        return albumLoadPromise;
+      }
+
+      window.__preloadMemorialAlbum = () => scheduleAlbumLoading({ immediate: true });
+
       albumPrevBtn?.addEventListener("click", () => {
+        if (!albumLoadStarted) scheduleAlbumLoading();
         renderAlbum(currentAlbumIndex - 1);
         restartAlbumAutoPlay();
       });
 
       albumNextBtn?.addEventListener("click", () => {
+        if (!albumLoadStarted) scheduleAlbumLoading();
         renderAlbum(currentAlbumIndex + 1);
         restartAlbumAutoPlay();
       });
 
       albumShuffleBtn?.addEventListener("click", () => {
+        if (!albumLoadStarted) scheduleAlbumLoading();
         if (!albumItems.length) return;
         renderAlbum(takeAlbumShuffleIndex());
         restartAlbumAutoPlay();
       });
 
       albumMainFrame?.addEventListener("click", () => {
+        if (!albumLoadStarted) scheduleAlbumLoading();
         if (!albumItems.length) return;
         openAlbumInModal(albumItems[currentAlbumIndex]);
       });
 
       albumViewAllBtn?.addEventListener("click", () => {
+        if (!albumLoadStarted) scheduleAlbumLoading();
         const expanded = albumFilmstrip?.classList.toggle("all-grid");
         albumViewAllBtn.textContent = expanded ? `收起胶片（共 ${albumItems.length} 张）` : `展开全部胶片（共 ${albumItems.length} 张）`;
         if (expanded) {
@@ -13466,7 +14127,18 @@
         }
       });
 
-      loadAlbumImages();
+      setAlbumPlaceholder();
+
+      if (albumGallery && "IntersectionObserver" in window) {
+        const albumLoadObserver = new IntersectionObserver((entries, observer) => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          observer.disconnect();
+          scheduleAlbumLoading();
+        }, { rootMargin: "6000px 0px", threshold: 0 });
+        albumLoadObserver.observe(albumGallery);
+      } else {
+        scheduleAlbumLoading();
+      }
 
       photoModal.addEventListener("click", () => {
         photoModal.classList.remove("show");
@@ -14349,8 +15021,8 @@
       const highDevice = (navigator.deviceMemory || 4) >= 8 &&
                          (navigator.hardwareConcurrency || 4) >= 8;
       const DPR_CAP = mobile ? (lowDevice ? 1 : 1.22) : (highDevice ? 1.65 : 1.4);
-      const MAX_PARTICLES = lowDevice ? 720 : (mobile ? 1100 : (highDevice ? 2300 : 1700));
-      const DENSITY = lowDevice ? .62 : (mobile ? .78 : 1);
+      const MAX_PARTICLES = lowDevice ? 720 : (mobile ? (highDevice ? 1450 : 1200) : (highDevice ? 2300 : 1700));
+      const DENSITY = lowDevice ? .62 : (mobile ? (highDevice ? .92 : .84) : 1);
 
       let width = innerWidth;
       let height = innerHeight;
@@ -15810,32 +16482,276 @@
       updateDrawCount();
       renderMemory(0);
 
-      /* ---------- Future reply paper plane ---------- */
+      /* ---------- QQ two-way memory post office ---------- */
       const replyForm = document.getElementById("replyForm");
       const replyText = document.getElementById("futureReplyText");
       const paperPlane = document.getElementById("paperPlane");
       const replySaved = document.getElementById("replySaved");
       const clearReply = document.getElementById("clearReply");
-      const replyKey = "kaoyu-future-reply-v1";
+      const launchReply = document.getElementById("launchReply");
+      const viewReplies = document.getElementById("viewReplies");
+      const closeReplies = document.getElementById("closeReplies");
+      const replyMailboxPanel = document.getElementById("replyMailboxPanel");
+      const replyMailboxList = document.getElementById("replyMailboxList");
+      const replyMailboxStatus = document.getElementById("replyMailboxStatus");
+      const replyCustomDateWrap = document.getElementById("replyCustomDateWrap");
+      const replyCustomDate = document.getElementById("replyCustomDate");
+      const replyUsTargetWrap = document.getElementById("replyUsTargetWrap");
+      const replyDraftKey = "kaoyu-qq-mail-draft-v2";
+      const legacyReplyKey = "kaoyu-private-reply-draft-v1";
+      const replyClientKey = "kaoyu-private-mailbox-client-v1";
+      let replyRefreshTimer = 0;
 
-      function showSavedReply(value) {
+      const destinationLabels = {
+        self: "未来的自己",
+        madaha: "马大哈",
+        goudongxi: "狗东西",
+        all: "马大哈和狗东西"
+      };
+
+      const mailStateLabels = {
+        pending: "等待送达",
+        retry: "等待重试",
+        partial: "部分已发送",
+        sent: "邮件已送达",
+        legacy: "仅保存在信箱"
+      };
+
+      function createReplyClientToken() {
+        try {
+          if (window.crypto?.randomUUID) return window.crypto.randomUUID().replaceAll("-", "");
+          const bytes = new Uint8Array(24);
+          window.crypto.getRandomValues(bytes);
+          return Array.from(bytes, value => value.toString(16).padStart(2, "0")).join("");
+        } catch (_) {
+          return `${Date.now().toString(16)}${Math.random().toString(16).slice(2)}${Math.random().toString(16).slice(2)}`.slice(0, 48);
+        }
+      }
+
+      let replyClientToken = storageGet(replyClientKey);
+      if (!replyClientToken) {
+        replyClientToken = createReplyClientToken();
+        storageSet(replyClientKey, replyClientToken);
+      }
+
+      function showReplyMessage(message, tone = "normal") {
         if (!replySaved) return;
-        if (!value) {
-          replySaved.classList.remove("show");
+        if (!message) {
+          replySaved.classList.remove("show", "error", "success");
           replySaved.textContent = "";
           return;
         }
-        replySaved.textContent = `已寄往以后：${value}`;
+        replySaved.textContent = message;
+        replySaved.classList.remove("error", "success");
+        if (tone === "error") replySaved.classList.add("error");
+        if (tone === "success") replySaved.classList.add("success");
         replySaved.classList.add("show");
       }
 
-      const savedReply = storageGet(replyKey);
-      if (savedReply) {
-        if (replyText) replyText.value = savedReply;
-        showSavedReply(savedReply);
+      function setMailboxStatus(message, isError = false) {
+        if (!replyMailboxStatus) return;
+        replyMailboxStatus.textContent = message || "";
+        replyMailboxStatus.classList.toggle("error", Boolean(isError));
       }
 
-      replyForm?.addEventListener("submit", event => {
+      function selectedReplyValue(name, fallback) {
+        return replyForm?.querySelector(`input[name="${name}"]:checked`)?.value || fallback;
+      }
+
+      function minCustomReplyDate() {
+        const date = new Date(Date.now() + 10 * 60 * 1000);
+        const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+        return local.toISOString().slice(0, 16);
+      }
+
+      function syncReplyRecipientControls() {
+        const mode = selectedReplyValue("replyRecipientMode", "self");
+        if (replyUsTargetWrap) replyUsTargetWrap.hidden = mode !== "us";
+      }
+
+      function syncReplyDeliveryControls() {
+        const mode = selectedReplyValue("replyDelivery", "now");
+        if (replyCustomDateWrap) replyCustomDateWrap.hidden = mode !== "custom";
+        if (replyCustomDate) replyCustomDate.min = minCustomReplyDate();
+      }
+
+      function computeReplyDelivery() {
+        const mode = selectedReplyValue("replyDelivery", "now");
+        if (mode === "now") return new Date().toISOString();
+        if (mode === "year") {
+          const date = new Date();
+          date.setFullYear(date.getFullYear() + 1);
+          return date.toISOString();
+        }
+        const raw = replyCustomDate?.value || "";
+        if (!raw) throw new Error("请选择这封信的送达时间");
+        const date = new Date(raw);
+        if (!Number.isFinite(date.getTime()) || date.getTime() <= Date.now() + 5 * 60 * 1000) {
+          throw new Error("送达时间至少要比现在晚 5 分钟");
+        }
+        return date.toISOString();
+      }
+
+      function formatReplyTime(value) {
+        const date = new Date(value);
+        if (!Number.isFinite(date.getTime())) return "时间未知";
+        return date.toLocaleString("zh-CN", {
+          year: "numeric", month: "2-digit", day: "2-digit",
+          hour: "2-digit", minute: "2-digit"
+        });
+      }
+
+      function animateReplyPlane() {
+        paperPlane?.classList.remove("fly");
+        void paperPlane?.offsetWidth;
+        paperPlane?.classList.add("fly");
+        tinyChime(76, .035);
+        setTimeout(() => tinyChime(83, .022), 240);
+      }
+
+      function destinationLabel(item) {
+        if (item.recipientMode === "self") return destinationLabels.self;
+        return destinationLabels[item.usTarget] || "我们俩";
+      }
+
+      function createEmailReplyThread(reply) {
+        const thread = document.createElement("div");
+        thread.className = "reply-mail-thread";
+
+        const head = document.createElement("div");
+        head.className = "reply-mail-thread-head";
+        const sender = document.createElement("strong");
+        sender.textContent = reply.fromLabel || reply.fromName || "邮箱回复";
+        const time = document.createElement("span");
+        time.textContent = formatReplyTime(reply.receivedAt);
+        head.append(sender, time);
+
+        const body = document.createElement("p");
+        body.className = "reply-mail-thread-body";
+        body.textContent = reply.content || "（这封回复没有可显示的文字）";
+
+        thread.append(head, body);
+        return thread;
+      }
+
+      function createMailboxItem(item) {
+        const article = document.createElement("article");
+        article.className = `reply-mail-item ${item.status === "sealed" ? "sealed" : "open"}`;
+
+        const meta = document.createElement("div");
+        meta.className = "reply-mail-meta";
+
+        const status = document.createElement("span");
+        status.textContent = item.status === "sealed"
+          ? "封存中"
+          : (mailStateLabels[item.mailState] || "已保存");
+
+        const destination = document.createElement("span");
+        destination.textContent = `寄往：${destinationLabel(item)}`;
+
+        const delivery = document.createElement("span");
+        delivery.textContent = `送达：${formatReplyTime(item.deliverAt)}`;
+        meta.append(status, destination, delivery);
+
+        const content = document.createElement("p");
+        content.className = "reply-mail-content";
+        content.textContent = item.content || `这封信还在路上，将于 ${formatReplyTime(item.deliverAt)} 以后发送。`;
+
+        const replies = document.createElement("div");
+        replies.className = "reply-mail-thread-list";
+        (item.emailReplies || []).forEach(reply => replies.appendChild(createEmailReplyThread(reply)));
+
+        if (!item.emailReplies?.length) {
+          const empty = document.createElement("div");
+          empty.className = "reply-mail-no-response";
+          empty.textContent = item.mailState === "sent"
+            ? "邮件已经送达。对方直接回复 QQ 邮件后，内容会在这里出现。"
+            : "邮件尚未完成投递，暂时还没有邮箱回复。";
+          replies.appendChild(empty);
+        }
+
+        const footer = document.createElement("div");
+        footer.className = "reply-mail-footer";
+        const sent = document.createElement("small");
+        sent.textContent = `写于 ${formatReplyTime(item.createdAt)}`;
+        const count = document.createElement("small");
+        count.textContent = `${item.emailReplies?.length || 0} 条邮箱回复`;
+        footer.append(sent, count);
+
+        article.append(meta, content, replies, footer);
+        return article;
+      }
+
+      function renderMailboxItems(items) {
+        if (!replyMailboxList) return;
+        replyMailboxList.replaceChildren();
+        if (!items?.length) {
+          const empty = document.createElement("div");
+          empty.className = "reply-mail-empty";
+          empty.textContent = "这里还没有寄出的信，也没有邮箱回复。";
+          replyMailboxList.appendChild(empty);
+          return;
+        }
+        items.forEach(item => replyMailboxList.appendChild(createMailboxItem(item)));
+      }
+
+      async function fetchMyReplies({ quiet = false } = {}) {
+        if (!replyMailboxPanel) return;
+        replyMailboxPanel.hidden = false;
+        if (!quiet) setMailboxStatus("正在收取邮箱回复……");
+        try {
+          const response = await fetch(`/api/replies/mine?clientToken=${encodeURIComponent(replyClientToken)}`, {
+            headers: { "Accept": "application/json" },
+            cache: "no-store"
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.message || "邮箱回复暂时打不开");
+          renderMailboxItems(data.items || []);
+          const replyCount = (data.items || []).reduce((sum, item) => sum + (item.emailReplies?.length || 0), 0);
+          setMailboxStatus(`共 ${data.items?.length || 0} 封信 · ${replyCount} 条邮箱回复 · 页面会自动刷新`);
+          replyMailboxPanel.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest" });
+        } catch (error) {
+          if (!quiet) {
+            setMailboxStatus(`${error.message}。本地草稿不会丢失。`, true);
+            renderMailboxItems([]);
+          }
+        }
+      }
+
+      function startReplyRefresh() {
+        clearInterval(replyRefreshTimer);
+        replyRefreshTimer = setInterval(() => {
+          if (!document.hidden && replyMailboxPanel && !replyMailboxPanel.hidden) {
+            fetchMyReplies({ quiet: true });
+          }
+        }, 60000);
+      }
+
+      const legacyDraft = storageGet(legacyReplyKey);
+      const savedDraft = storageGet(replyDraftKey) || legacyDraft;
+      if (savedDraft && replyText) {
+        replyText.value = savedDraft;
+        storageSet(replyDraftKey, savedDraft);
+        if (legacyDraft) storageRemove(legacyReplyKey);
+        showReplyMessage("上次没寄出的内容已经作为草稿恢复。");
+      }
+
+      replyText?.addEventListener("input", () => {
+        const value = replyText.value;
+        if (value) storageSet(replyDraftKey, value);
+        else storageRemove(replyDraftKey);
+      });
+
+      replyForm?.querySelectorAll('input[name="replyRecipientMode"]').forEach(input => {
+        input.addEventListener("change", syncReplyRecipientControls);
+      });
+      replyForm?.querySelectorAll('input[name="replyDelivery"]').forEach(input => {
+        input.addEventListener("change", syncReplyDeliveryControls);
+      });
+      syncReplyRecipientControls();
+      syncReplyDeliveryControls();
+
+      replyForm?.addEventListener("submit", async event => {
         event.preventDefault();
         const value = replyText?.value.trim() || "";
         if (!value) {
@@ -15846,20 +16762,82 @@
           );
           return;
         }
-        storageSet(replyKey, value);
-        showSavedReply(value);
-        paperPlane?.classList.remove("fly");
-        void paperPlane?.offsetWidth;
-        paperPlane?.classList.add("fly");
-        tinyChime(76, .035);
-        setTimeout(() => tinyChime(83, .022), 240);
+
+        let deliverAt;
+        try {
+          deliverAt = computeReplyDelivery();
+        } catch (error) {
+          showReplyMessage(error.message, "error");
+          return;
+        }
+
+        const recipientMode = selectedReplyValue("replyRecipientMode", "self");
+        const usTarget = recipientMode === "us"
+          ? selectedReplyValue("replyUsTarget", "all")
+          : null;
+
+        const originalLabel = launchReply?.textContent || "寄出这封信";
+        if (launchReply) {
+          launchReply.disabled = true;
+          launchReply.textContent = "正在寄出……";
+        }
+        showReplyMessage("正在把这封信送进回忆邮局……");
+
+        try {
+          const response = await fetch("/api/replies", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({
+              clientToken: replyClientToken,
+              content: value,
+              recipientMode,
+              usTarget,
+              deliverAt
+            })
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.message || "这封信暂时没有寄出去");
+
+          storageRemove(replyDraftKey);
+          if (replyText) replyText.value = "";
+          const destination = destinationLabel(data.item);
+          const arrival = data.item.status === "sealed"
+            ? `它会在 ${formatReplyTime(data.item.deliverAt)} 寄往${destination}。`
+            : data.item.mailState === "sent"
+              ? `邮件已经寄往${destination}。`
+              : `信已保存，系统会继续投递到${destination}。`;
+          showReplyMessage(`信已经寄出。${arrival}`, "success");
+          animateReplyPlane();
+
+          if (replyMailboxPanel && !replyMailboxPanel.hidden) {
+            setTimeout(() => fetchMyReplies({ quiet: true }), 1200);
+          }
+        } catch (error) {
+          storageSet(replyDraftKey, value);
+          showReplyMessage(`${error.message}。内容仍保存在当前设备的草稿里。`, "error");
+        } finally {
+          if (launchReply) {
+            launchReply.disabled = false;
+            launchReply.textContent = originalLabel;
+          }
+        }
       });
 
       clearReply?.addEventListener("click", () => {
-        storageRemove(replyKey);
+        storageRemove(replyDraftKey);
         if (replyText) replyText.value = "";
-        showSavedReply("");
+        showReplyMessage("草稿已经清空。");
         replyText?.focus();
+      });
+
+      viewReplies?.addEventListener("click", () => {
+        fetchMyReplies();
+        startReplyRefresh();
+      });
+
+      closeReplies?.addEventListener("click", () => {
+        if (replyMailboxPanel) replyMailboxPanel.hidden = true;
+        clearInterval(replyRefreshTimer);
       });
 
       /* ---------- Hidden “吱～” easter egg ---------- */
@@ -16025,37 +17003,93 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
       ];
 
       const tracks = [
-        {
-          title: "一路生花",
+{
+          title: "小美满",
           kicker: "ENDING PLAYLIST · 01/05",
-          artist: "作词：宋普照 · 作曲：张博文 · 编曲：李师珏",
-          subtitle: "最初的结尾曲 · 已同步歌词",
+          artist: "周深",
+          subtitle: "温柔开场 · 已同步歌词",
           sources: [
-            { src: "audio/ending-01.flac", type: "audio/flac" },
-            { src: "audio/ending-01.mp3", type: "audio/mpeg" },
-            { src: "audio/ending-01.m4a", type: "audio/mp4" },
-            { src: "audio/ending-01.wav", type: "audio/wav" },
-            { src: "audio/ending-01.ogg", type: "audio/ogg" },
-            { src: "audio/一路生花.flac", type: "audio/flac" },
-            { src: "audio/一路生花.mp3", type: "audio/mpeg" },
-            { src: "audio/一路生花.m4a", type: "audio/mp4" },
-            { src: "audio/一路生花.wav", type: "audio/wav" },
-            { src: "audio/一路生花.ogg", type: "audio/ogg" }
+            { src: "audio/ending-03.mp3", type: "audio/mpeg" }
           ],
-          lyrics: lyricsSong1,
-          base: "ending-01"
+          lyrics: [
+            { time: 0, text: "作词: 李聪", credit: true },
+            { time: 1, text: "作曲: 彭飞", credit: true },
+            { time: 2, text: "编曲: 彭飞", credit: true },
+            { time: 3, text: "制作人: 彭飞", credit: true },
+            { time: 17.58, text: "没什么 大愿望" },
+            { time: 20.62, text: "没有什么事 要赶" },
+            { time: 23.84, text: "看见路口红灯 一直闪" },
+            { time: 26.92, text: "它像 眨眼的小太阳" },
+            { time: 30.01, text: "乌云还 挺大胆" },
+            { time: 33.17, text: "顶在头上 吹不散" },
+            { time: 36.08, text: "我抓在手里 捏成棉花糖" },
+            { time: 39.38, text: "什么烦恼 不能忘" },
+            { time: 43.33, text: "既然 是路一定有转弯" },
+            { time: 47.08, text: "哪个风景 都漂亮" },
+            { time: 50.31, text: "揉揉疲惫的眼睛 停下来 看一看" },
+            { time: 55.56, text: "美好简单" },
+            { time: 60.6, text: "你看" },
+            { time: 61.34, text: "小狗在叫 树叶会笑" },
+            { time: 64.43, text: "风声在呢喃" },
+            { time: 67.44, text: "不如好好 欣赏一秒" },
+            { time: 70.66, text: "迷迷糊糊的 浪漫" },
+            { time: 73.03, text: "只要 一觉醒来 床单洒满" },
+            { time: 76.87, text: "阳光的 温暖" },
+            { time: 79.24, text: "不去想 不必想" },
+            { time: 82.39, text: "不用急急忙忙 说一个 答案" },
+            { time: 98.6, text: "笑一笑 就灿烂" },
+            { time: 101.57, text: "唱一句歌 就舒展" },
+            { time: 104.81, text: "收集一点一滴 小美满" },
+            { time: 107.95, text: "都是 幸福的花样" },
+            { time: 110.99, text: "没道理 的开朗" },
+            { time: 114.18, text: "打扮 平凡的日常" },
+            { time: 117.03, text: "找到自己 最合身的衣裳" },
+            { time: 120.35, text: "只要自己 够喜欢" },
+            { time: 124.31, text: "至少 还有温柔的眼光" },
+            { time: 128.15, text: "还在夜里 看月亮" },
+            { time: 131.24, text: "心情铺得再满 也要留一扇天窗" },
+            { time: 136.49, text: "岁月很长" },
+            { time: 141.51, text: "你看" },
+            { time: 142.33, text: "小狗在叫 树叶会笑" },
+            { time: 145.41, text: "风声在呢喃" },
+            { time: 148.46, text: "不如好好 欣赏一秒" },
+            { time: 151.64, text: "迷迷糊糊的浪漫" },
+            { time: 154.03, text: "只要 一觉醒来 床单洒满" },
+            { time: 157.85, text: "阳光的温暖" },
+            { time: 160.23, text: "不去想 不必想" },
+            { time: 163.35, text: "不用急急忙忙 说一个 答案" },
+            { time: 169.55, text: "你愿相信什么" },
+            { time: 171.94, text: "就把世界 看成什么样" },
+            { time: 176.54, text: "偶尔难题 加点重量" },
+            { time: 179.66, text: "越要 轻轻地旋转" },
+            { time: 182.04, text: "所以 无论如何" },
+            { time: 184.4, text: "记得保管 小小的光环" },
+            { time: 188.23, text: "笑就好 哭也好" },
+            { time: 191.44, text: "今天 就是明天最好的 陪伴" },
+            { time: 197.51, text: "笑就好 哭也好" },
+            { time: 202.3, text: "自己 就是自己最好的 陪伴" },
+            { time: 209.2, text: "和声: 周深", credit: true },
+            { time: 209.62, text: "弦乐: 彭飞", credit: true },
+            { time: 210.03, text: "吉他: 毕赫宸", credit: true },
+            { time: 210.45, text: "录音室: @SBMS Beijing", credit: true },
+            { time: 210.86, text: "录音师: 徐威@52Hz studio Shanghai/汝文博@SBMS Beijing", credit: true },
+            { time: 211.28, text: "混音室: @SBMS Beijing", credit: true },
+            { time: 211.7, text: "混音师: 赵靖@SBMS Beijing", credit: true },
+            { time: 212.11, text: "母带工程师: 赵靖 @SBMS Beijing", credit: true },
+            { time: 212.53, text: "OP: 索尼音乐版权代理（北京）有限公司/上海乐宥创意策划中心", credit: true },
+            { time: 212.94, text: "SP: 索尼音乐版权代理（北京）有限公司", credit: true },
+            { time: 213.36, text: "特别鸣谢: 周深工作室", credit: true },
+            { time: 213.78, text: "音乐发行: 听见时代", credit: true }
+          ],
+          base: "ending-03"
         },
-        {
+{
           title: "世界赠予我的",
           kicker: "ENDING PLAYLIST · 02/05",
           artist: "王菲",
-          subtitle: "烟花晚风 · 已同步歌词",
+          subtitle: "遇见与感谢 · 已同步歌词",
           sources: [
-            { src: "audio/ending.flac", type: "audio/flac" },
-            { src: "audio/ending.mp3", type: "audio/mpeg" },
-            { src: "audio/ending.m4a", type: "audio/mp4" },
-            { src: "audio/ending.wav", type: "audio/wav" },
-            { src: "audio/ending.ogg", type: "audio/ogg" }
+            { src: "audio/ending.mp3", type: "audio/mpeg" }
           ],
           lyrics: [
             { time: 0, text: "词: 袁晶", credit: true },
@@ -16103,17 +17137,13 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
           ],
           base: "ending"
         },
-        {
+{
           title: "起风了",
           kicker: "ENDING PLAYLIST · 03/05",
           artist: "吴青峰",
-          subtitle: "晚风远行 · 已同步歌词",
+          subtitle: "回忆与成长 · 已同步歌词",
           sources: [
-            { src: "audio/ending-02.flac", type: "audio/flac" },
-            { src: "audio/ending-02.mp3", type: "audio/mpeg" },
-            { src: "audio/ending-02.m4a", type: "audio/mp4" },
-            { src: "audio/ending-02.wav", type: "audio/wav" },
-            { src: "audio/ending-02.ogg", type: "audio/ogg" }
+            { src: "audio/ending-02.mp3", type: "audio/mpeg" }
           ],
           lyrics: [
             { time: 0, text: "配唱制作人: 刘胡轶", credit: true },
@@ -16200,101 +17230,13 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
           ],
           base: "ending-02"
         },
-        {
-          title: "小美满",
-          kicker: "ENDING PLAYLIST · 04/05",
-          artist: "周深",
-          subtitle: "温柔日常 · 已同步歌词",
-          sources: [
-            { src: "audio/ending-03.flac", type: "audio/flac" },
-            { src: "audio/ending-03.mp3", type: "audio/mpeg" },
-            { src: "audio/ending-03.m4a", type: "audio/mp4" },
-            { src: "audio/ending-03.wav", type: "audio/wav" },
-            { src: "audio/ending-03.ogg", type: "audio/ogg" }
-          ],
-          lyrics: [
-            { time: 0, text: "作词: 李聪", credit: true },
-            { time: 1, text: "作曲: 彭飞", credit: true },
-            { time: 2, text: "编曲: 彭飞", credit: true },
-            { time: 3, text: "制作人: 彭飞", credit: true },
-            { time: 17.58, text: "没什么 大愿望" },
-            { time: 20.62, text: "没有什么事 要赶" },
-            { time: 23.84, text: "看见路口红灯 一直闪" },
-            { time: 26.92, text: "它像 眨眼的小太阳" },
-            { time: 30.01, text: "乌云还 挺大胆" },
-            { time: 33.17, text: "顶在头上 吹不散" },
-            { time: 36.08, text: "我抓在手里 捏成棉花糖" },
-            { time: 39.38, text: "什么烦恼 不能忘" },
-            { time: 43.33, text: "既然 是路一定有转弯" },
-            { time: 47.08, text: "哪个风景 都漂亮" },
-            { time: 50.31, text: "揉揉疲惫的眼睛 停下来 看一看" },
-            { time: 55.56, text: "美好简单" },
-            { time: 60.6, text: "你看" },
-            { time: 61.34, text: "小狗在叫 树叶会笑" },
-            { time: 64.43, text: "风声在呢喃" },
-            { time: 67.44, text: "不如好好 欣赏一秒" },
-            { time: 70.66, text: "迷迷糊糊的 浪漫" },
-            { time: 73.03, text: "只要 一觉醒来 床单洒满" },
-            { time: 76.87, text: "阳光的 温暖" },
-            { time: 79.24, text: "不去想 不必想" },
-            { time: 82.39, text: "不用急急忙忙 说一个 答案" },
-            { time: 98.6, text: "笑一笑 就灿烂" },
-            { time: 101.57, text: "唱一句歌 就舒展" },
-            { time: 104.81, text: "收集一点一滴 小美满" },
-            { time: 107.95, text: "都是 幸福的花样" },
-            { time: 110.99, text: "没道理 的开朗" },
-            { time: 114.18, text: "打扮 平凡的日常" },
-            { time: 117.03, text: "找到自己 最合身的衣裳" },
-            { time: 120.35, text: "只要自己 够喜欢" },
-            { time: 124.31, text: "至少 还有温柔的眼光" },
-            { time: 128.15, text: "还在夜里 看月亮" },
-            { time: 131.24, text: "心情铺得再满 也要留一扇天窗" },
-            { time: 136.49, text: "岁月很长" },
-            { time: 141.51, text: "你看" },
-            { time: 142.33, text: "小狗在叫 树叶会笑" },
-            { time: 145.41, text: "风声在呢喃" },
-            { time: 148.46, text: "不如好好 欣赏一秒" },
-            { time: 151.64, text: "迷迷糊糊的浪漫" },
-            { time: 154.03, text: "只要 一觉醒来 床单洒满" },
-            { time: 157.85, text: "阳光的温暖" },
-            { time: 160.23, text: "不去想 不必想" },
-            { time: 163.35, text: "不用急急忙忙 说一个 答案" },
-            { time: 169.55, text: "你愿相信什么" },
-            { time: 171.94, text: "就把世界 看成什么样" },
-            { time: 176.54, text: "偶尔难题 加点重量" },
-            { time: 179.66, text: "越要 轻轻地旋转" },
-            { time: 182.04, text: "所以 无论如何" },
-            { time: 184.4, text: "记得保管 小小的光环" },
-            { time: 188.23, text: "笑就好 哭也好" },
-            { time: 191.44, text: "今天 就是明天最好的 陪伴" },
-            { time: 197.51, text: "笑就好 哭也好" },
-            { time: 202.3, text: "自己 就是自己最好的 陪伴" },
-            { time: 209.2, text: "和声: 周深", credit: true },
-            { time: 209.62, text: "弦乐: 彭飞", credit: true },
-            { time: 210.03, text: "吉他: 毕赫宸", credit: true },
-            { time: 210.45, text: "录音室: @SBMS Beijing", credit: true },
-            { time: 210.86, text: "录音师: 徐威@52Hz studio Shanghai/汝文博@SBMS Beijing", credit: true },
-            { time: 211.28, text: "混音室: @SBMS Beijing", credit: true },
-            { time: 211.7, text: "混音师: 赵靖@SBMS Beijing", credit: true },
-            { time: 212.11, text: "母带工程师: 赵靖 @SBMS Beijing", credit: true },
-            { time: 212.53, text: "OP: 索尼音乐版权代理（北京）有限公司/上海乐宥创意策划中心", credit: true },
-            { time: 212.94, text: "SP: 索尼音乐版权代理（北京）有限公司", credit: true },
-            { time: 213.36, text: "特别鸣谢: 周深工作室", credit: true },
-            { time: 213.78, text: "音乐发行: 听见时代", credit: true }
-          ],
-          base: "ending-03"
-        },
-        {
+{
           title: "干杯",
-          kicker: "ENDING PLAYLIST · 05/05",
+          kicker: "ENDING PLAYLIST · 04/05",
           artist: "五月天",
-          subtitle: "友情终章 · 已同步歌词",
+          subtitle: "敬一起走过 · 已同步歌词",
           sources: [
-            { src: "audio/ending-04.flac", type: "audio/flac" },
-            { src: "audio/ending-04.mp3", type: "audio/mpeg" },
-            { src: "audio/ending-04.m4a", type: "audio/mp4" },
-            { src: "audio/ending-04.wav", type: "audio/wav" },
-            { src: "audio/ending-04.ogg", type: "audio/ogg" }
+            { src: "audio/ending-04.mp3", type: "audio/mpeg" }
           ],
           lyrics: [
             { time: 0, text: "作词: 五月天 阿信", credit: true },
@@ -16370,47 +17312,58 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
             { time: 288.05, text: "合唱：强辩 + 阿邦 + 小凯 + 阿沚", credit: true }
           ],
           base: "ending-04"
+        },
+{
+          title: "一路生花",
+          kicker: "ENDING PLAYLIST · 05/05",
+          artist: "作词：宋普照 · 作曲：张博文 · 编曲：李师珏",
+          subtitle: "最后祝福",
+          sources: [
+            { src: "audio/ending-01.mp3", type: "audio/mpeg" }
+          ],
+          lyrics: lyricsSong1,
+          base: "ending-01"
         }
       ];
 
       const trackStories = [
-        {
-          summary: "这首歌写的不是一路顺风，而是即使前方有风沙，也依然愿意带着希望继续往前走。它像一份很明亮的祝福，希望新的阶段里，走过的每一步都能慢慢开出花来。",
-          why: "把它放在第一首，是因为它最像送别时想说的那句愿您前程似锦。离开不是终点，而是带着过去的美好，去迎接新的开始。",
-          note: "愿您以后的每一步，都有花开。"
+{
+          summary: "这首歌写的不是轰轰烈烈，而是那些普通日子里的温柔片段。原来真正让人舍不得的，往往不是大事，而是每天都在发生的小小美满。",
+          why: "把它放在第一首，是因为回头看最亮的，其实是那些看起来再普通不过的瞬间：聊天、斗图、打趣、一起出门、一起上班。因为有您在，它们才变得特别。",
+          note: "那些平常的日子，因为有您在，都成了小美满。"
         },
-        {
+{
           summary: "这首歌在说，世界给人的从来不只有温柔，也有起伏、离别和考验。但正因为这些一起出现，人生才完整，回忆才会发光。",
           why: "想把它放在这里，是因为这一段相处里，有热闹、有情绪、有帮忙、有玩笑，也有最后不得不说再见的时候。谢谢您把这些都留在了这段日子里。",
           note: "谢谢您曾经出现在这段故事里。"
         },
-        {
+{
           summary: "这首歌像在回头看，也像在继续往前走。它说的是成长，是少年气，是走过很多路之后，依旧愿意相信风会把人吹向更广阔的地方。",
           why: "把它放在第三首，是想留住那种一起走过一段路的感觉。虽然以后各奔新的方向，但曾经并肩的那阵风，会一直留在记忆里。",
           note: "愿起风的时候，也总有人陪您赶路。"
         },
-        {
-          summary: "这首歌写的不是轰轰烈烈，而是那些普通日子里的温柔片段。原来真正让人舍不得的，往往不是大事，而是每天都在发生的小小美满。",
-          why: "想把它放在这里，是因为回头看最亮的，其实是那些看起来再普通不过的瞬间：聊天、斗图、打趣、一起出门、一起上班。因为有您在，它们才变得特别。",
-          note: "那些平常的日子，因为有您在，都成了小美满。"
-        },
-        {
+{
           summary: "这首歌写的是，时间一直往前走，但那些一起笑过、闹过、认真生活过的日子，会被回忆酿成一杯甜。人与人可能走向不同方向，真正的友情却不会因为离开而作废。",
-          why: "把它放在最后，是想为一起走过的日子碰一次杯。不是把告别写得很沉重，而是认真说一句谢谢，也约定以后哪怕不在同一张考勤表里，偶尔想起彼此，仍然可以自然地问候。",
+          why: "把它放在第四首，是想为一起走过的日子碰一次杯。不是把告别写得很沉重，而是认真说一句谢谢，也约定以后哪怕不在同一张考勤表里，偶尔想起彼此，仍然可以自然地问候。",
           note: "敬一起走过的日子，也敬以后各自闪闪发光。"
+        },
+{
+          summary: "这首歌写的不是一路顺风，而是即使前方有风沙，也依然愿意带着希望继续往前走。它像一份很明亮的祝福，希望新的阶段里，走过的每一步都能慢慢开出花来。",
+          why: "把它放在最后，是因为它最像送别时想说的那句愿您前程似锦。离开不是终点，而是带着过去的美好，去迎接新的开始。",
+          note: "愿您以后的每一步，都有花开。"
         }
       ];
 
       const storyThemes = [
-        { a: "#f5c978", b: "#ef8fb8", c: "#9cb8ff", symbol: "花", label: "BLOOM INTO THE FUTURE", effect: "bloom" },
-        { a: "#d9e7ff", b: "#8fd8ec", c: "#b79cff", symbol: "赠", label: "EVERY GIFT BECOMES LIGHT", effect: "gift" },
-        { a: "#8ee2d1", b: "#a78cff", c: "#f0c67d", symbol: "风", label: "LET THE WIND CARRY US ON", effect: "wind" },
-        { a: "#ffd18e", b: "#ff9fae", c: "#94d8e5", symbol: "满", label: "SMALL MOMENTS, FULL HEART", effect: "warm" },
-        { a: "#ffd58a", b: "#f2a86f", c: "#9edbe8", symbol: "杯", label: "TO THE DAYS WE SHARED", effect: "toast" },
-        { a: "#ffe09a", b: "#f3a6c8", c: "#9edcff", symbol: "∞", label: "FIVE SONGS · ONE STORY", effect: "finale" }
+{ a: "#ffd18e", b: "#ff9fae", c: "#94d8e5", symbol: "满", label: "SMALL MOMENTS, FULL HEART", effect: "warm" },
+{ a: "#d9e7ff", b: "#8fd8ec", c: "#b79cff", symbol: "赠", label: "EVERY GIFT BECOMES LIGHT", effect: "gift" },
+{ a: "#8ee2d1", b: "#a78cff", c: "#f0c67d", symbol: "风", label: "LET THE WIND CARRY US ON", effect: "wind" },
+{ a: "#ffd58a", b: "#f2a86f", c: "#9edbe8", symbol: "杯", label: "TO THE DAYS WE SHARED", effect: "toast" },
+{ a: "#f5c978", b: "#ef8fb8", c: "#9cb8ff", symbol: "花", label: "BLOOM INTO THE FUTURE", effect: "bloom" },
+{ a: "#ffe09a", b: "#f3a6c8", c: "#9edcff", symbol: "∞", label: "FIVE SONGS · ONE STORY", effect: "finale" }
       ];
 
-      const SOUNDTRACK_STATE_KEY = "memorial_soundtrack_story_state_v2";
+      const SOUNDTRACK_STATE_KEY = "memorial_soundtrack_story_state_v4_ordered";
       const savedSoundtrackState = (() => {
         try {
           const raw = localStorage.getItem(SOUNDTRACK_STATE_KEY);
@@ -16433,9 +17386,15 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
       let sourceNode = null;
       let audioData = null;
       let reactiveRaf = 0;
-      let pendingPlayAfterLoad = false;
+      let startReactiveBackground = () => {};
+      let stopReactiveBackground = () => {};
       let trackLoadToken = 0;
+      let pendingPlayAfterLoad = false;
       let sectionVisible = false;
+      const lowPowerDevice = reduceMotion
+        || (Number(navigator.deviceMemory || 0) > 0 && Number(navigator.deviceMemory) <= 4)
+        || (Number(navigator.hardwareConcurrency || 0) > 0 && Number(navigator.hardwareConcurrency) <= 4)
+        || matchMedia("(max-width: 820px), (pointer: coarse)").matches;
       let storySequenceTimer = 0;
       let storyCountdownTimer = 0;
       let storyExitTimer = 0;
@@ -16567,7 +17526,15 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
         const ctx = storyFxCanvas.getContext("2d");
         if (!ctx) return;
 
-        const effectIndex = isFinale ? 5 : Math.max(0, Math.min(Number(trackIndex) || 0, 4));
+        /* 每首歌播放结束后的视觉效果，按歌曲寓意一一对应：
+           01 小美满 → 暖色萤火与小心形
+           02 世界赠予我的 → 月球与礼物轨道
+           03 起风了 → 风线、绸带与流星
+           04 干杯 → 碰杯、金色光环与上升碎光
+           05 一路生花 → 花瓣雨与中央花轮 */
+        const trackEffectMap = [3, 1, 2, 4, 0];
+        const safeTrackIndex = Math.max(0, Math.min(Number(trackIndex) || 0, 4));
+        const effectIndex = isFinale ? 5 : trackEffectMap[safeTrackIndex];
         const state = {
           width: 0,
           height: 0,
@@ -17201,21 +18168,34 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       function drawReactiveBackground() {
         if (!reactiveCanvas) return;
-        const ctx = reactiveCanvas.getContext("2d");
+        const ctx = reactiveCanvas.getContext("2d", { alpha: true });
         if (!ctx) return;
 
+        let width = 1;
+        let height = 1;
+        let lastFrame = 0;
+        let lastCssUpdate = 0;
+        const frameInterval = lowPowerDevice ? 50 : 33;
+        const pointStep = lowPowerDevice ? 15 : 11;
+
         const resize = () => {
-          const ratio = Math.min(window.devicePixelRatio || 1, 2);
-          const { width, height } = reactiveCanvas.getBoundingClientRect();
+          const ratio = Math.min(window.devicePixelRatio || 1, lowPowerDevice ? 1.25 : 1.6);
+          const rect = reactiveCanvas.getBoundingClientRect();
+          width = Math.max(1, rect.width);
+          height = Math.max(1, rect.height);
           reactiveCanvas.width = Math.max(1, Math.round(width * ratio));
           reactiveCanvas.height = Math.max(1, Math.round(height * ratio));
           ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
         };
-        resize();
-        addEventListener("resize", resize, { passive: true });
 
-        const render = () => {
-          const { width, height } = reactiveCanvas.getBoundingClientRect();
+        const render = timestamp => {
+          reactiveRaf = 0;
+          if (!sectionVisible || document.hidden || reduceMotion) return;
+          if (timestamp - lastFrame < frameInterval) {
+            reactiveRaf = requestAnimationFrame(render);
+            return;
+          }
+          lastFrame = timestamp;
           ctx.clearRect(0, 0, width, height);
 
           let bass = 0.12, mid = 0.14, treble = 0.18, energy = 0.12;
@@ -17237,10 +18217,13 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
             energy = Math.min(1, bass * 0.52 + mid * 0.30 + treble * 0.18);
           }
 
-          section.style.setProperty("--audio-energy", energy.toFixed(3));
-          section.style.setProperty("--audio-bass", bass.toFixed(3));
-          section.style.setProperty("--audio-mid", mid.toFixed(3));
-          section.style.setProperty("--audio-treble", treble.toFixed(3));
+          if (timestamp - lastCssUpdate >= 100) {
+            lastCssUpdate = timestamp;
+            section.style.setProperty("--audio-energy", energy.toFixed(3));
+            section.style.setProperty("--audio-bass", bass.toFixed(3));
+            section.style.setProperty("--audio-mid", mid.toFixed(3));
+            section.style.setProperty("--audio-treble", treble.toFixed(3));
+          }
 
           const waveY = height * .72;
           const colors = [
@@ -17248,13 +18231,14 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
             `rgba(211, 188, 255, ${0.08 + mid * 0.22})`,
             `rgba(150, 178, 255, ${0.06 + treble * 0.2})`
           ];
+          const phaseBase = timestamp * 0.0007;
 
           colors.forEach((color, layer) => {
             ctx.beginPath();
             ctx.moveTo(0, height);
-            for (let x = 0; x <= width; x += 8) {
-              const phase = performance.now() * (0.0007 + layer * 0.00024);
-              const amp = (22 + layer * 18) * (0.32 + energy * (0.9 - layer * 0.16));
+            const phase = phaseBase + timestamp * layer * 0.00024;
+            const amp = (22 + layer * 18) * (0.32 + energy * (0.9 - layer * 0.16));
+            for (let x = 0; x <= width; x += pointStep) {
               const y = waveY + Math.sin(x * (0.011 + layer * 0.0022) + phase) * amp - layer * 36;
               ctx.lineTo(x, y);
             }
@@ -17267,7 +18251,21 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
           reactiveRaf = requestAnimationFrame(render);
         };
 
-        if (!reduceMotion) reactiveRaf = requestAnimationFrame(render);
+        startReactiveBackground = () => {
+          if (reactiveRaf || document.hidden || !sectionVisible || reduceMotion) return;
+          reactiveRaf = requestAnimationFrame(render);
+        };
+        stopReactiveBackground = () => {
+          if (reactiveRaf) cancelAnimationFrame(reactiveRaf);
+          reactiveRaf = 0;
+        };
+
+        resize();
+        addEventListener("resize", resize, { passive: true });
+        document.addEventListener("visibilitychange", () => {
+          document.hidden ? stopReactiveBackground() : startReactiveBackground();
+        }, { passive: true });
+        startReactiveBackground();
       }
 
       function renderLyrics() {
@@ -17368,7 +18366,6 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
         completionTrackIndex = -1;
         currentTrackIndex = index;
         persistSoundtrackState();
-        const track = getCurrentTrack();
         trackLoadToken += 1;
         const token = trackLoadToken;
         pendingPlayAfterLoad = autoplay;
@@ -17378,7 +18375,7 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
         progress.style.setProperty('--music-progress', '0%');
         currentTimeNode.textContent = '00:00';
         durationNode.textContent = '00:00';
-updateTrackMeta();
+        updateTrackMeta();
         renderLyrics();
         pickSource(index, 0, token);
       }
@@ -17466,13 +18463,13 @@ updateTrackMeta();
 
       progress.addEventListener('pointerdown', event => event.preventDefault());
       progress.addEventListener('keydown', event => event.preventDefault());
-audio.addEventListener('timeupdate', () => {
+      audio.addEventListener('timeupdate', () => {
         if (!seeking && Number.isFinite(audio.duration) && audio.duration > 0) {
           const ratio = audio.currentTime / audio.duration;
           progress.value = String(Math.round(ratio * 1000));
           progress.style.setProperty('--music-progress', `${ratio * 100}%`);
           currentTimeNode.textContent = formatTime(audio.currentTime);
-}
+        }
         syncLyrics(false);
 
         if (!seeking && !completionInProgress && Number.isFinite(audio.duration) && audio.duration > 0
@@ -17508,6 +18505,7 @@ audio.addEventListener('timeupdate', () => {
         entries.forEach(entry => {
           if (entry.target !== section) return;
           sectionVisible = entry.isIntersecting && entry.intersectionRatio > 0.48;
+          sectionVisible ? startReactiveBackground() : stopReactiveBackground();
           if (sectionVisible) {
             if (!autoPlayAttempted && !userPaused) {
               autoPlayAttempted = true;
@@ -17542,10 +18540,32 @@ audio.addEventListener('timeupdate', () => {
       const input = document.getElementById("memoryPassword");
       const button = document.getElementById("memoryPasswordBtn");
       const feedback = document.getElementById("memoryPasswordFeedback");
-      const PASSWORD = "0227";
+      const PASSWORD_SALT = "9c94e769ee9ac5e5538e6d161bcf8103";
+      const PASSWORD_HASH = "7d7cec23f9bd859987811e9e1febab777f16d317e08d67d04bd34c7edab3af94";
       let unlocked = false;
+      let verifying = false;
+      window.__memoryLockActive = true;
 
       if (!lock || !card || !input || !button || !feedback) return;
+
+      const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
+
+      async function runPasswordGateWarmup() {
+        // 严格按顺序后台准备：首屏图 → OUR MOMENTS → MEMORY ALBUM → 第 1 首音频缓存。
+        // 解锁动作不等待它，用户进入页面后这条队列仍会继续完成。
+        try {
+          await (window.__memorialFirstPageReady || Promise.resolve());
+          await window.__preloadOurMoments?.();
+          await window.__preloadMemorialAlbum?.();
+
+          const firstTrackReady = await window.__startMemorialSoundtrackPreload?.();
+          if (firstTrackReady === false) return;
+
+          window.__preloadRemainingMemorialTracks?.();
+        } catch (error) {
+          // 单个资源失败不阻断密码解锁和页面使用。
+        }
+      }
 
       function setFeedback(message, type = "") {
         feedback.textContent = message;
@@ -17562,11 +18582,102 @@ audio.addEventListener('timeupdate', () => {
         input.value = input.value.replace(/\D+/g, "").slice(0, 4);
       }
 
+      function sha256Ascii(ascii) {
+        const rightRotate = (value, amount) => (value >>> amount) | (value << (32 - amount));
+        const maxWord = Math.pow(2, 32);
+        const words = [];
+        const asciiBitLength = ascii.length * 8;
+        const hash = [];
+        const k = [];
+        const isComposite = {};
+
+        for (let candidate = 2, primeCounter = 0; primeCounter < 64; candidate += 1) {
+          if (isComposite[candidate]) continue;
+          for (let multiple = candidate * candidate; multiple < 313; multiple += candidate) {
+            isComposite[multiple] = true;
+          }
+          if (primeCounter < 8) {
+            hash[primeCounter] = (Math.pow(candidate, 0.5) * maxWord) | 0;
+          }
+          k[primeCounter] = (Math.pow(candidate, 1 / 3) * maxWord) | 0;
+          primeCounter += 1;
+        }
+
+        ascii += "\x80";
+        while (ascii.length % 64 !== 56) ascii += "\x00";
+
+        for (let i = 0; i < ascii.length; i += 1) {
+          const code = ascii.charCodeAt(i);
+          words[i >> 2] |= code << ((3 - i) % 4) * 8;
+        }
+
+        words[words.length] = (asciiBitLength / maxWord) | 0;
+        words[words.length] = asciiBitLength;
+
+        for (let blockStart = 0; blockStart < words.length;) {
+          const chunk = words.slice(blockStart, blockStart += 16);
+          const oldHash = hash.slice(0);
+
+          for (let i = 0; i < 64; i += 1) {
+            const w15 = chunk[i - 15];
+            const w2 = chunk[i - 2];
+            const a = hash[0];
+            const e = hash[4];
+            const temp1 = (
+              hash[7]
+              + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25))
+              + ((e & hash[5]) ^ ((~e) & hash[6]))
+              + k[i]
+              + (chunk[i] = i < 16 ? chunk[i] : (
+                chunk[i - 16]
+                + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3))
+                + chunk[i - 7]
+                + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))
+              ) | 0)
+            ) | 0;
+            const temp2 = (
+              (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22))
+              + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]))
+            ) | 0;
+
+            hash.pop();
+            hash.unshift((temp1 + temp2) | 0);
+            hash[4] = (hash[4] + temp1) | 0;
+          }
+
+          for (let i = 0; i < 8; i += 1) {
+            hash[i] = (hash[i] + oldHash[i]) | 0;
+          }
+        }
+
+        return hash.map(value =>
+          ("00000000" + (value >>> 0).toString(16)).slice(-8)
+        ).join("");
+      }
+
       function unlockMemory() {
-        if (unlocked) return;
+        if (unlocked || verifying) return;
         sanitize();
-        if (input.value === PASSWORD) {
+        if (input.value.length !== 4) {
+          setFeedback("请输入完整的 4 位回忆密码。", "error");
+          shakeCard();
+          input.focus();
+          return;
+        }
+
+        verifying = true;
+        button.disabled = true;
+        const passwordMatched =
+          sha256Ascii(PASSWORD_SALT + ":" + input.value) === PASSWORD_HASH;
+        verifying = false;
+        button.disabled = false;
+
+        if (passwordMatched) {
           unlocked = true;
+          document.title = "有些同事，后来成了朋友 · 致敬烤鱼";
+          input.value = "";
+          window.__memoryLockActive = false;
+          window.dispatchEvent(new CustomEvent("memorial:unlocked"));
           window.prepareEndingAudio?.();
           lock.classList.add("success");
           setFeedback("密码正确，回忆正在为你打开……", "success");
@@ -17577,7 +18688,7 @@ audio.addEventListener('timeupdate', () => {
             document.getElementById("startBtn")?.focus();
           }, 980);
         } else {
-          setFeedback("你连你生日都忘了吗？", "error");
+          setFeedback("我他丫的揍你一顿。", "error");
           shakeCard();
           input.focus();
           input.select();
@@ -17598,6 +18709,7 @@ audio.addEventListener('timeupdate', () => {
 
       addEventListener("load", () => {
         setTimeout(() => input.focus(), 220);
+        window.setTimeout(runPasswordGateWarmup, 80);
       });
     })();
   </script>
@@ -17612,19 +18724,16 @@ audio.addEventListener('timeupdate', () => {
       const alertLayer = document.getElementById("resourceFolderAlert");
       const missingNode = document.getElementById("resourceFolderAlertMissing");
       const retryButton = document.getElementById("resourceFolderRetry");
-
+      const continueButton = document.getElementById("resourceFolderContinue");
       if (!alertLayer) return;
 
       const audioCandidates = [
-        "audio/ending-01.mp3",
-        "audio/ending-01.m4a",
-        "audio/ending-01.ogg",
-        "audio/ending-01.wav",
-        "audio/ending-01.flac",
-        "audio/一路生花.mp3",
-        "audio/一路生花.flac"
+        "audio/ending-03.mp3",
+        "audio/ending.mp3",
+        "audio/ending-02.mp3",
+        "audio/ending-04.mp3",
+        "audio/ending-01.mp3"
       ];
-
       const imageCandidates = [
         "images/album/album-01.jpg",
         "images/hero-photo.jpg",
@@ -17633,80 +18742,17 @@ audio.addEventListener('timeupdate', () => {
       ];
 
       let checking = false;
+      const exists = (path) => window.__memorialResourceExists
+        ? window.__memorialResourceExists(path, 10000)
+        : Promise.resolve(false);
 
-      function probeImage(path, timeout = 2600) {
-        return new Promise(resolve => {
-          const image = new Image();
-          let settled = false;
-          const finish = value => {
-            if (settled) return;
-            settled = true;
-            clearTimeout(timer);
-            image.onload = null;
-            image.onerror = null;
-            resolve(value);
-          };
-          const timer = window.setTimeout(() => finish(false), timeout);
-          image.onload = () => finish(true);
-          image.onerror = () => finish(false);
-          image.src = path + (path.includes("?") ? "&" : "?") + "folderCheck=" + Date.now();
-        });
-      }
-
-      function probeAudio(path, timeout = 3000) {
-        return new Promise(resolve => {
-          const media = document.createElement("audio");
-          let settled = false;
-          const finish = value => {
-            if (settled) return;
-            settled = true;
-            clearTimeout(timer);
-            media.removeAttribute("src");
-            media.load();
-            resolve(value);
-          };
-          const timer = window.setTimeout(() => finish(false), timeout);
-          media.preload = "metadata";
-          media.addEventListener("loadedmetadata", () => finish(true), { once: true });
-          media.addEventListener("canplay", () => finish(true), { once: true });
-          media.addEventListener("error", () => finish(false), { once: true });
-          media.src = path;
-          media.load();
-        });
-      }
-
-      function anyCandidateWorks(paths, probe) {
-        return new Promise(resolve => {
-          let remaining = paths.length;
-          let finished = false;
-
-          if (!remaining) {
-            resolve(false);
-            return;
-          }
-
-          paths.forEach(path => {
-            probe(path).then(ok => {
-              if (finished) return;
-              if (ok) {
-                finished = true;
-                resolve(true);
-                return;
-              }
-              remaining -= 1;
-              if (remaining === 0) {
-                finished = true;
-                resolve(false);
-              }
-            }).catch(() => {
-              remaining -= 1;
-              if (!finished && remaining === 0) {
-                finished = true;
-                resolve(false);
-              }
-            });
-          });
-        });
+      async function anyCandidateWorks(paths) {
+        for (const path of paths) {
+          try {
+            if (await exists(path)) return true;
+          } catch (_) {}
+        }
+        return false;
       }
 
       function hideAlert() {
@@ -17716,9 +18762,7 @@ audio.addEventListener('timeupdate', () => {
 
       function showAlert(missingFolders) {
         if (missingNode) {
-          missingNode.textContent = missingFolders.length
-            ? "当前未检测到：" + missingFolders.join("、") + " 文件夹中的网页资源"
-            : "未能确认资源文件夹，请检查网页所在位置。";
+          missingNode.textContent = `当前未检测到：${missingFolders.join("、")} 文件夹中的可用资源。请确认文件名与目录层级。`;
         }
         alertLayer.classList.add("show");
         alertLayer.setAttribute("aria-hidden", "false");
@@ -17727,41 +18771,38 @@ audio.addEventListener('timeupdate', () => {
       async function runFolderCheck() {
         if (checking) return;
         checking = true;
-        if (retryButton) {
-          retryButton.disabled = true;
-          retryButton.textContent = "正在检测…";
-        }
+        retryButton && (retryButton.disabled = true, retryButton.textContent = "正在检测…");
 
+        /* 使用原生媒体元素检查，兼容本地打开和网页导入环境。 */
         const [audioReady, imagesReady] = await Promise.all([
-          anyCandidateWorks(audioCandidates, probeAudio),
-          anyCandidateWorks(imageCandidates, probeImage)
+          anyCandidateWorks(audioCandidates),
+          anyCandidateWorks(imageCandidates)
         ]);
 
         checking = false;
-        if (retryButton) {
-          retryButton.disabled = false;
-          retryButton.textContent = "重新检测";
-        }
+        retryButton && (retryButton.disabled = false, retryButton.textContent = "重新检测");
 
-        const missingFolders = [];
-        if (!audioReady) missingFolders.push("audio");
-        if (!imagesReady) missingFolders.push("images");
+        const missing = [];
+        if (!audioReady) missing.push("audio");
+        if (!imagesReady) missing.push("images");
+        missing.length ? showAlert(missing) : hideAlert();
 
-        if (missingFolders.length) showAlert(missingFolders);
-        else hideAlert();
+        window.__memorialResourceCheck = { audioReady, imagesReady, checkedAt: Date.now() };
+        window.dispatchEvent(new CustomEvent("memorial-resource-check", { detail: window.__memorialResourceCheck }));
       }
 
       retryButton?.addEventListener("click", runFolderCheck);
+      continueButton?.addEventListener("click", hideAlert);
+      window.__runMemorialResourceCheck = runFolderCheck;
 
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", runFolderCheck, { once: true });
-      } else {
-        runFolderCheck();
-      }
+      const schedule = () => window.setTimeout(runFolderCheck, 1200);
+      document.readyState === "complete"
+        ? schedule()
+        : window.addEventListener("load", schedule, { once: true });
     })();
   </script>
 
-  <script id="mobile-adaptation-v33">
+  <script id="mobile-adaptation-v33-script">
     (() => {
       "use strict";
 
@@ -17782,8 +18823,7 @@ audio.addEventListener('timeupdate', () => {
       addEventListener("orientationchange", () => setTimeout(setViewportHeight, 120), { passive: true });
       window.visualViewport?.addEventListener("resize", setViewportHeight, { passive: true });
 
-      /* GitHub Pages 无法列出文件夹；不再用弹窗阻断网页。 */
-      document.getElementById("resourceFolderAlert")?.remove();
+      /* 资源检查使用原生 img/audio，不依赖 HEAD 或 fetch。 */
 
       document.querySelectorAll("img").forEach(image => {
         image.loading ||= "lazy";
@@ -17797,6 +18837,81 @@ audio.addEventListener('timeupdate', () => {
       });
     })();
   </script>
+
+
+<script id="mobile-enhancement-v34-script">
+  (() => {
+    "use strict";
+
+    const root = document.documentElement;
+    const coarse = matchMedia("(pointer: coarse)").matches;
+    const mobile = coarse || innerWidth <= 820;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!mobile) return;
+
+    const memory = Number(navigator.deviceMemory || 0);
+    const cores = Number(navigator.hardwareConcurrency || 0);
+    const richEnough = !reduced && (
+      memory >= 6 ||
+      cores >= 8 ||
+      (!memory && cores >= 6)
+    );
+
+    root.classList.toggle("mobile-rich", richEnough);
+    root.classList.toggle("mobile-standard", !richEnough);
+
+    /* 点击照片：短暂按压 + 扫光，作为桌面 hover 的触屏等价反馈。 */
+    document.addEventListener("pointerdown", event => {
+      const card = event.target.closest?.(".photo-card");
+      if (!card || event.pointerType === "mouse") return;
+      card.classList.add("mobile-press");
+    }, { passive: true });
+
+    const releasePhoto = event => {
+      const card = event.target.closest?.(".photo-card");
+      if (!card) return;
+      card.classList.remove("mobile-press");
+    };
+
+    document.addEventListener("pointerup", releasePhoto, { passive: true });
+    document.addEventListener("pointercancel", releasePhoto, { passive: true });
+
+    document.addEventListener("click", event => {
+      const card = event.target.closest?.(".photo-card");
+      if (!card) return;
+      card.classList.remove("mobile-sweep");
+      void card.offsetWidth;
+      card.classList.add("mobile-sweep");
+      window.setTimeout(() => card.classList.remove("mobile-sweep"), 900);
+    });
+
+    /* 让底部导航始终把当前章节滚到可见区域。 */
+    const nav = document.getElementById("storyNav");
+    if (nav) {
+      const links = [...nav.querySelectorAll("a")];
+      const centerActive = () => {
+        const active = nav.querySelector("a.active");
+        active?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest", inline: "center" });
+      };
+
+      const observer = new MutationObserver(records => {
+        if (records.some(record => record.attributeName === "class")) centerActive();
+      });
+      links.forEach(link => observer.observe(link, { attributes: true, attributeFilter: ["class"] }));
+      links.forEach(link => link.addEventListener("click", () => {
+        if (navigator.vibrate) navigator.vibrate(8);
+      }, { passive: true }));
+      requestAnimationFrame(centerActive);
+    }
+
+    /* 星座选择增加轻触反馈。 */
+    document.querySelectorAll(".memory-star").forEach(star => {
+      star.addEventListener("click", () => {
+        if (navigator.vibrate) navigator.vibrate(10);
+      }, { passive: true });
+    });
+  })();
+</script>
 
 </body>
 </html>
