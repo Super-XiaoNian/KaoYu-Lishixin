@@ -3427,7 +3427,7 @@
 
     .fork-divider {
       position: absolute;
-      left: var(--split);
+      left: clamp(23px, var(--split), calc(100% - 23px));
       top: 0;
       bottom: 0;
       z-index: 9;
@@ -11388,7 +11388,7 @@
           </p>
         </div>
 
-        <div class="fork-stage reveal" id="forkStage" tabindex="0" role="slider" aria-valuemin="10" aria-valuemax="90" aria-valuenow="54" aria-label="拖动比较两个世界，轻点中间圆点可自动切换">
+        <div class="fork-stage reveal" id="forkStage" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="54" aria-label="拖动比较两个世界，轻点中间圆点可自动切换">
           <div class="fork-world fork-muted">
             <div class="fork-badge">如果没有填错</div>
             <div class="fork-scene">
@@ -11422,8 +11422,8 @@
             class="fork-range"
             id="forkRange"
             type="range"
-            min="10"
-            max="90"
+            min="0"
+            max="100"
             value="54"
             tabindex="-1"
             aria-hidden="true"
@@ -15151,7 +15151,7 @@
       let forkAutoTimer = 0;
 
       function clampFork(value) {
-        return Math.max(10, Math.min(90, Number(value) || 54));
+        return Math.max(0, Math.min(100, Number(value) || 54));
       }
 
       function updateFork(value) {
@@ -15166,7 +15166,7 @@
         const rect = forkStage?.getBoundingClientRect();
         if (!rect?.width) return forkValue;
         const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-        return 10 + ratio * 80;
+        return ratio * 100;
       }
 
       function autoMoveFork(target) {
@@ -15206,7 +15206,7 @@
         forkStage?.releasePointerCapture?.(event.pointerId);
         forkStage?.classList.remove("is-dragging");
         if (forkStartedOnDivider && !forkPointerMoved) {
-          autoMoveFork(forkValue < 72 ? 90 : 10);
+          autoMoveFork(forkValue < 72 ? 100 : 0);
         }
         forkPointerId = null;
       }
@@ -15223,10 +15223,10 @@
           updateFork(forkValue + 4);
         } else if (event.key === "Home") {
           event.preventDefault();
-          autoMoveFork(10);
+          autoMoveFork(0);
         } else if (event.key === "End" || event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          autoMoveFork(forkValue < 72 ? 90 : 10);
+          autoMoveFork(forkValue < 72 ? 100 : 0);
         }
       });
 
